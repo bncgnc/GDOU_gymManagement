@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ggms.mapper.EquipmentApplicationMapper">
+  <resultMap id="BaseResultMap" type="com.ggms.pojo.EquipmentApplication">
+    <id column="equipment_applicationid" jdbcType="INTEGER" property="equipmentApplicationid" />
+    <result column="equipmentid" jdbcType="INTEGER" property="equipmentid" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="eanum" jdbcType="INTEGER" property="eanum" />
+    <result column="eaplantime" jdbcType="INTEGER" property="eaplantime" />
+    <result column="eapermit" jdbcType="INTEGER" property="eapermit" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    equipment_applicationid, equipmentid, userid, eanum, eaplantime, eapermit
+  </sql>
+  <select id="selectByExample" parameterType="com.ggms.pojo.EquipmentApplicationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from equipment_application
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from equipment_application
+    where equipment_applicationid = #{equipmentApplicationid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from equipment_application
+    where equipment_applicationid = #{equipmentApplicationid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ggms.pojo.EquipmentApplicationExample">
+    delete from equipment_application
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ggms.pojo.EquipmentApplication">
+    insert into equipment_application (equipment_applicationid, equipmentid, 
+      userid, eanum, eaplantime, 
+      eapermit)
+    values (#{equipmentApplicationid,jdbcType=INTEGER}, #{equipmentid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=VARCHAR}, #{eanum,jdbcType=INTEGER}, #{eaplantime,jdbcType=INTEGER}, 
+      #{eapermit,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ggms.pojo.EquipmentApplication">
+    insert into equipment_application
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="equipmentApplicationid != null">
+        equipment_applicationid,
+      </if>
+      <if test="equipmentid != null">
+        equipmentid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="eanum != null">
+        eanum,
+      </if>
+      <if test="eaplantime != null">
+        eaplantime,
+      </if>
+      <if test="eapermit != null">
+        eapermit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="equipmentApplicationid != null">
+        #{equipmentApplicationid,jdbcType=INTEGER},
+      </if>
+      <if test="equipmentid != null">
+        #{equipmentid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="eanum != null">
+        #{eanum,jdbcType=INTEGER},
+      </if>
+      <if test="eaplantime != null">
+        #{eaplantime,jdbcType=INTEGER},
+      </if>
+      <if test="eapermit != null">
+        #{eapermit,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ggms.pojo.EquipmentApplicationExample" resultType="java.lang.Long">
+    select count(*) from equipment_application
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update equipment_application
+    <set>
+      <if test="record.equipmentApplicationid != null">
+        equipment_applicationid = #{record.equipmentApplicationid,jdbcType=INTEGER},
+      </if>
+      <if test="record.equipmentid != null">
+        equipmentid = #{record.equipmentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eanum != null">
+        eanum = #{record.eanum,jdbcType=INTEGER},
+      </if>
+      <if test="record.eaplantime != null">
+        eaplantime = #{record.eaplantime,jdbcType=INTEGER},
+      </if>
+      <if test="record.eapermit != null">
+        eapermit = #{record.eapermit,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update equipment_application
+    set equipment_applicationid = #{record.equipmentApplicationid,jdbcType=INTEGER},
+      equipmentid = #{record.equipmentid,jdbcType=INTEGER},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      eanum = #{record.eanum,jdbcType=INTEGER},
+      eaplantime = #{record.eaplantime,jdbcType=INTEGER},
+      eapermit = #{record.eapermit,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ggms.pojo.EquipmentApplication">
+    update equipment_application
+    <set>
+      <if test="equipmentid != null">
+        equipmentid = #{equipmentid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="eanum != null">
+        eanum = #{eanum,jdbcType=INTEGER},
+      </if>
+      <if test="eaplantime != null">
+        eaplantime = #{eaplantime,jdbcType=INTEGER},
+      </if>
+      <if test="eapermit != null">
+        eapermit = #{eapermit,jdbcType=INTEGER},
+      </if>
+    </set>
+    where equipment_applicationid = #{equipmentApplicationid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ggms.pojo.EquipmentApplication">
+    update equipment_application
+    set equipmentid = #{equipmentid,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=VARCHAR},
+      eanum = #{eanum,jdbcType=INTEGER},
+      eaplantime = #{eaplantime,jdbcType=INTEGER},
+      eapermit = #{eapermit,jdbcType=INTEGER}
+    where equipment_applicationid = #{equipmentApplicationid,jdbcType=INTEGER}
+  </update>
+</mapper>

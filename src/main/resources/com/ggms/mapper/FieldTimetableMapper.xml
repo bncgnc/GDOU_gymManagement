@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ggms.mapper.FieldTimetableMapper">
+  <resultMap id="BaseResultMap" type="com.ggms.pojo.FieldTimetable">
+    <id column="field_timetableid" jdbcType="INTEGER" property="fieldTimetableid" />
+    <result column="fieldid" jdbcType="INTEGER" property="fieldid" />
+    <result column="fdtime_start" jdbcType="DATE" property="fdtimeStart" />
+    <result column="fdtime_end" jdbcType="DATE" property="fdtimeEnd" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    field_timetableid, fieldid, fdtime_start, fdtime_end
+  </sql>
+  <select id="selectByExample" parameterType="com.ggms.pojo.FieldTimetableExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from field_timetable
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from field_timetable
+    where field_timetableid = #{fieldTimetableid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from field_timetable
+    where field_timetableid = #{fieldTimetableid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ggms.pojo.FieldTimetableExample">
+    delete from field_timetable
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ggms.pojo.FieldTimetable">
+    insert into field_timetable (field_timetableid, fieldid, fdtime_start, 
+      fdtime_end)
+    values (#{fieldTimetableid,jdbcType=INTEGER}, #{fieldid,jdbcType=INTEGER}, #{fdtimeStart,jdbcType=DATE}, 
+      #{fdtimeEnd,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ggms.pojo.FieldTimetable">
+    insert into field_timetable
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fieldTimetableid != null">
+        field_timetableid,
+      </if>
+      <if test="fieldid != null">
+        fieldid,
+      </if>
+      <if test="fdtimeStart != null">
+        fdtime_start,
+      </if>
+      <if test="fdtimeEnd != null">
+        fdtime_end,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fieldTimetableid != null">
+        #{fieldTimetableid,jdbcType=INTEGER},
+      </if>
+      <if test="fieldid != null">
+        #{fieldid,jdbcType=INTEGER},
+      </if>
+      <if test="fdtimeStart != null">
+        #{fdtimeStart,jdbcType=DATE},
+      </if>
+      <if test="fdtimeEnd != null">
+        #{fdtimeEnd,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ggms.pojo.FieldTimetableExample" resultType="java.lang.Long">
+    select count(*) from field_timetable
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update field_timetable
+    <set>
+      <if test="record.fieldTimetableid != null">
+        field_timetableid = #{record.fieldTimetableid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fieldid != null">
+        fieldid = #{record.fieldid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdtimeStart != null">
+        fdtime_start = #{record.fdtimeStart,jdbcType=DATE},
+      </if>
+      <if test="record.fdtimeEnd != null">
+        fdtime_end = #{record.fdtimeEnd,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update field_timetable
+    set field_timetableid = #{record.fieldTimetableid,jdbcType=INTEGER},
+      fieldid = #{record.fieldid,jdbcType=INTEGER},
+      fdtime_start = #{record.fdtimeStart,jdbcType=DATE},
+      fdtime_end = #{record.fdtimeEnd,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ggms.pojo.FieldTimetable">
+    update field_timetable
+    <set>
+      <if test="fieldid != null">
+        fieldid = #{fieldid,jdbcType=INTEGER},
+      </if>
+      <if test="fdtimeStart != null">
+        fdtime_start = #{fdtimeStart,jdbcType=DATE},
+      </if>
+      <if test="fdtimeEnd != null">
+        fdtime_end = #{fdtimeEnd,jdbcType=DATE},
+      </if>
+    </set>
+    where field_timetableid = #{fieldTimetableid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ggms.pojo.FieldTimetable">
+    update field_timetable
+    set fieldid = #{fieldid,jdbcType=INTEGER},
+      fdtime_start = #{fdtimeStart,jdbcType=DATE},
+      fdtime_end = #{fdtimeEnd,jdbcType=DATE}
+    where field_timetableid = #{fieldTimetableid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ggms.mapper.FieldApplicationMapper">
+  <resultMap id="BaseResultMap" type="com.ggms.pojo.FieldApplication">
+    <id column="field_applicationid" jdbcType="INTEGER" property="fieldApplicationid" />
+    <result column="field_timetableid" jdbcType="INTEGER" property="fieldTimetableid" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="fapermit" jdbcType="INTEGER" property="fapermit" />
+    <result column="fapaid" jdbcType="INTEGER" property="fapaid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    field_applicationid, field_timetableid, userid, fapermit, fapaid
+  </sql>
+  <select id="selectByExample" parameterType="com.ggms.pojo.FieldApplicationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from field_application
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from field_application
+    where field_applicationid = #{fieldApplicationid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from field_application
+    where field_applicationid = #{fieldApplicationid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ggms.pojo.FieldApplicationExample">
+    delete from field_application
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ggms.pojo.FieldApplication">
+    insert into field_application (field_applicationid, field_timetableid, 
+      userid, fapermit, fapaid
+      )
+    values (#{fieldApplicationid,jdbcType=INTEGER}, #{fieldTimetableid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=VARCHAR}, #{fapermit,jdbcType=INTEGER}, #{fapaid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ggms.pojo.FieldApplication">
+    insert into field_application
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fieldApplicationid != null">
+        field_applicationid,
+      </if>
+      <if test="fieldTimetableid != null">
+        field_timetableid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="fapermit != null">
+        fapermit,
+      </if>
+      <if test="fapaid != null">
+        fapaid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fieldApplicationid != null">
+        #{fieldApplicationid,jdbcType=INTEGER},
+      </if>
+      <if test="fieldTimetableid != null">
+        #{fieldTimetableid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="fapermit != null">
+        #{fapermit,jdbcType=INTEGER},
+      </if>
+      <if test="fapaid != null">
+        #{fapaid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ggms.pojo.FieldApplicationExample" resultType="java.lang.Long">
+    select count(*) from field_application
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update field_application
+    <set>
+      <if test="record.fieldApplicationid != null">
+        field_applicationid = #{record.fieldApplicationid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fieldTimetableid != null">
+        field_timetableid = #{record.fieldTimetableid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fapermit != null">
+        fapermit = #{record.fapermit,jdbcType=INTEGER},
+      </if>
+      <if test="record.fapaid != null">
+        fapaid = #{record.fapaid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update field_application
+    set field_applicationid = #{record.fieldApplicationid,jdbcType=INTEGER},
+      field_timetableid = #{record.fieldTimetableid,jdbcType=INTEGER},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      fapermit = #{record.fapermit,jdbcType=INTEGER},
+      fapaid = #{record.fapaid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ggms.pojo.FieldApplication">
+    update field_application
+    <set>
+      <if test="fieldTimetableid != null">
+        field_timetableid = #{fieldTimetableid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="fapermit != null">
+        fapermit = #{fapermit,jdbcType=INTEGER},
+      </if>
+      <if test="fapaid != null">
+        fapaid = #{fapaid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where field_applicationid = #{fieldApplicationid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ggms.pojo.FieldApplication">
+    update field_application
+    set field_timetableid = #{fieldTimetableid,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=VARCHAR},
+      fapermit = #{fapermit,jdbcType=INTEGER},
+      fapaid = #{fapaid,jdbcType=INTEGER}
+    where field_applicationid = #{fieldApplicationid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ggms.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.ggms.pojo.User">
+    <id column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="ucredit" jdbcType="INTEGER" property="ucredit" />
+    <result column="utype" jdbcType="INTEGER" property="utype" />
+    <result column="uunit" jdbcType="VARCHAR" property="uunit" />
+    <result column="upassword" jdbcType="VARCHAR" property="upassword" />
+    <result column="uphone" jdbcType="VARCHAR" property="uphone" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    userid, uname, ucredit, utype, uunit, upassword, uphone
+  </sql>
+  <select id="selectByExample" parameterType="com.ggms.pojo.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where userid = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where userid = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ggms.pojo.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ggms.pojo.User">
+    insert into user (userid, uname, ucredit, 
+      utype, uunit, upassword, 
+      uphone)
+    values (#{userid,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, #{ucredit,jdbcType=INTEGER}, 
+      #{utype,jdbcType=INTEGER}, #{uunit,jdbcType=VARCHAR}, #{upassword,jdbcType=VARCHAR}, 
+      #{uphone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ggms.pojo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="uname != null">
+        uname,
+      </if>
+      <if test="ucredit != null">
+        ucredit,
+      </if>
+      <if test="utype != null">
+        utype,
+      </if>
+      <if test="uunit != null">
+        uunit,
+      </if>
+      <if test="upassword != null">
+        upassword,
+      </if>
+      <if test="uphone != null">
+        uphone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="ucredit != null">
+        #{ucredit,jdbcType=INTEGER},
+      </if>
+      <if test="utype != null">
+        #{utype,jdbcType=INTEGER},
+      </if>
+      <if test="uunit != null">
+        #{uunit,jdbcType=VARCHAR},
+      </if>
+      <if test="upassword != null">
+        #{upassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uphone != null">
+        #{uphone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ggms.pojo.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uname != null">
+        uname = #{record.uname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ucredit != null">
+        ucredit = #{record.ucredit,jdbcType=INTEGER},
+      </if>
+      <if test="record.utype != null">
+        utype = #{record.utype,jdbcType=INTEGER},
+      </if>
+      <if test="record.uunit != null">
+        uunit = #{record.uunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upassword != null">
+        upassword = #{record.upassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uphone != null">
+        uphone = #{record.uphone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set userid = #{record.userid,jdbcType=VARCHAR},
+      uname = #{record.uname,jdbcType=VARCHAR},
+      ucredit = #{record.ucredit,jdbcType=INTEGER},
+      utype = #{record.utype,jdbcType=INTEGER},
+      uunit = #{record.uunit,jdbcType=VARCHAR},
+      upassword = #{record.upassword,jdbcType=VARCHAR},
+      uphone = #{record.uphone,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ggms.pojo.User">
+    update user
+    <set>
+      <if test="uname != null">
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="ucredit != null">
+        ucredit = #{ucredit,jdbcType=INTEGER},
+      </if>
+      <if test="utype != null">
+        utype = #{utype,jdbcType=INTEGER},
+      </if>
+      <if test="uunit != null">
+        uunit = #{uunit,jdbcType=VARCHAR},
+      </if>
+      <if test="upassword != null">
+        upassword = #{upassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uphone != null">
+        uphone = #{uphone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ggms.pojo.User">
+    update user
+    set uname = #{uname,jdbcType=VARCHAR},
+      ucredit = #{ucredit,jdbcType=INTEGER},
+      utype = #{utype,jdbcType=INTEGER},
+      uunit = #{uunit,jdbcType=VARCHAR},
+      upassword = #{upassword,jdbcType=VARCHAR},
+      uphone = #{uphone,jdbcType=VARCHAR}
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>
