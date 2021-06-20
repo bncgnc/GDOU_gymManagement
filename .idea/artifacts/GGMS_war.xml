@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="GGMS:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="GGMS_war.war">
+      <element id="artifact" artifact-name="GGMS:war exploded" />
+    </root>
+  </artifact>
+</component>

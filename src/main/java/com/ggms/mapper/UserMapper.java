@@ -3,9 +3,11 @@ package com.ggms.mapper;
 import com.ggms.pojo.User;
 import com.ggms.pojo.UserExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface UserMapper {
     long countByExample(UserExample example);
 

@@ -3,9 +3,11 @@ package com.ggms.mapper;
 import com.ggms.pojo.EquipmentApplication;
 import com.ggms.pojo.EquipmentApplicationExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface EquipmentApplicationMapper {
     long countByExample(EquipmentApplicationExample example);
 

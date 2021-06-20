@@ -3,9 +3,11 @@ package com.ggms.mapper;
 import com.ggms.pojo.FieldTimetable;
 import com.ggms.pojo.FieldTimetableExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface FieldTimetableMapper {
     long countByExample(FieldTimetableExample example);
 

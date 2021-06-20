@@ -3,9 +3,11 @@ package com.ggms.mapper;
 import com.ggms.pojo.FieldApplication;
 import com.ggms.pojo.FieldApplicationExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface FieldApplicationMapper {
     long countByExample(FieldApplicationExample example);
 

@@ -13,7 +13,7 @@ public class MyBatisUtils {
     private static SqlSessionFactory factory = null;
 
     static {
-        String config = "testMyBatisConfig.xml";
+        String config = "myBatisConfig.xml";
         try {
             InputStream stream = Resources.getResourceAsStream(config);
             SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();

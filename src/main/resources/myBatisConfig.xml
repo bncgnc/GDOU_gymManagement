@@ -3,8 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!--myBatis主配置文件-->
 
-    <properties resource="testMyBatis.properties"/>
+    <!--<properties resource="myBatis.properties"/>-->
 
     <settings>
         <setting name="logImpl" value="STDOUT_LOGGING"/>
@@ -15,6 +16,7 @@
         <package name="com/ggms/pojo"/>
     </typeAliases>
 
+    <!--
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -26,8 +28,11 @@
             </dataSource>
         </environment>
     </environments>
+    -->
 
+    <!-- 只有逆向工程时才需要定义这个，千万不要生成了mapper后还保留
     <mappers>
         <package name="com/ggms/mapper"/>
     </mappers>
+    -->
 </configuration>

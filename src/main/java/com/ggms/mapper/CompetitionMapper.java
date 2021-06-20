@@ -3,9 +3,11 @@ package com.ggms.mapper;
 import com.ggms.pojo.Competition;
 import com.ggms.pojo.CompetitionExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface CompetitionMapper {
     long countByExample(CompetitionExample example);
 
