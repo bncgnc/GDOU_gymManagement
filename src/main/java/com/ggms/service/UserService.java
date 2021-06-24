@@ -9,5 +9,11 @@ import java.util.List;
 public interface UserService {
     public List<User> findAllUser(UserExample example);
 
-    public int addUser(User record);
+    public User login(String userid , String password);
+
+    public void register(User user);
+
+    public User findUserById(String userid);
+
+    public int insertUser(User record);
 }

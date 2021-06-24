@@ -21,7 +21,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int addUser(User record) {
+    public User login(String userid, String password) {
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andUseridEqualTo(userid);
+        criteria.andUpasswordEqualTo(password);
+
+        List<User> users = userMapper.selectByExample(example);
+
+        if( users.size() > 0) {
+            return users.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public void register(User user) {
+        user.setUtype(0); //设置用户类型为普通用户
+        user.setUcredit(3); //设置用户信誉
+        userMapper.insert(user);
+    }
+
+    @Override
+    public User findUserById(String userid) {
+        return userMapper.selectByPrimaryKey(userid);
+    }
+
+    @Override
+    public int insertUser(User record) {
         return userMapper.insert(record);
     }
 }
