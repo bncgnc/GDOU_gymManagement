@@ -18,8 +18,10 @@
 
     <!--配置视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/"></property>
         <property name="suffix" value=".jsp"></property>
+        <property name="prefix" value="/"></property>
     </bean>
-
+    <mvc:resources mapping="/static/css/**" location="/static/css/"/>
+    <mvc:resources mapping="/static/js/**" location="/static/js/"/>
+    <mvc:resources mapping="/static/images/**" location="/static/images/"/>
 </beans>

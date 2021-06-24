@@ -1,6 +1,7 @@
 package com.ggms.pojo;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 
 public class FieldTimetable implements Serializable {
@@ -8,9 +9,9 @@ public class FieldTimetable implements Serializable {
 
     private Integer fieldid;
 
-    private Date fdtimeStart;
+    private Time fdtimeStart;
 
-    private Date fdtimeEnd;
+    private Time fdtimeEnd;
 
     private static final long serialVersionUID = 1L;
 
@@ -30,19 +31,19 @@ public class FieldTimetable implements Serializable {
         this.fieldid = fieldid;
     }
 
-    public Date getFdtimeStart() {
+    public Time getFdtimeStart() {
         return fdtimeStart;
     }
 
-    public void setFdtimeStart(Date fdtimeStart) {
+    public void setFdtimeStart(Time fdtimeStart) {
         this.fdtimeStart = fdtimeStart;
     }
 
-    public Date getFdtimeEnd() {
+    public Time getFdtimeEnd() {
         return fdtimeEnd;
     }
 
-    public void setFdtimeEnd(Date fdtimeEnd) {
+    public void setFdtimeEnd(Time fdtimeEnd) {
         this.fdtimeEnd = fdtimeEnd;
     }
 

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController{
     @Autowired
     private UserService userService;
 
@@ -21,5 +21,9 @@ public class UserController {
         mv.addObject("userList", userService.findAllUser(null));
 
         return mv;
+    }
+    @RequestMapping("/userMain")
+    public String userMain(){
+        return "usermain";
     }
 }
