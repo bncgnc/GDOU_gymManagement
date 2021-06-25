@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController{
     @Autowired
     private UserService userService;
 
@@ -66,5 +66,9 @@ public class UserController {
         }
 
         return mv;
+    }
+    @RequestMapping("/userMain")
+    public String userMain(){
+        return "usermain";
     }
 }

@@ -30,4 +30,6 @@ public interface CompetitionMapper {
     int updateByPrimaryKeySelective(Competition record);
 
     int updateByPrimaryKey(Competition record);
+
+    
 }
