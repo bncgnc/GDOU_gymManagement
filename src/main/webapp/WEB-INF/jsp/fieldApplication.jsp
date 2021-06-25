@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<script src="${pageContext.request.contextPath}/static/js/vue.js"></script>
+<script src="${pageContext.request.contextPath}/js/vue.js"></script>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -21,8 +21,8 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script language="JavaScript" src="http://cdn.staticfile.org/moment.js/2.24.0/moment.js"></script>
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<body style="background-image: url('/static/images/jimon_haru.jpg')">
-<div style="width: 100%;height:160px;background-image: url('/static/images/bg23.png')">
+<body style="background-image: url('/images/jimon_haru.jpg')">
+<div style="width: 100%;height:160px;background-image: url('/images/bg23.png')">
     <h1 class="text-center text-primary">场地申请</h1>
 
 </div>

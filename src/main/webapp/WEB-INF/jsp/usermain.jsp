@@ -13,8 +13,8 @@
     <title>Main</title>
 </head>
 <script src="https://cdn.bootcss.com/vue/2.5.22/vue.js"></script>
-<link type="text/css" rel="stylesheet" href="/static/css/bootstrap.css">
-<script language="JavaScript" src="/static/js/bootstrap.js"></script>
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.css">
+<script language="JavaScript" src="/js/bootstrap.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script language="JavaScript" src="http://cdn.staticfile.org/moment.js/2.24.0/moment.js"></script>
 <style>
@@ -22,7 +22,7 @@
         color: red !important;
     }
 </style>
-<body style="background-image: url('/static/images/jimon_haru.jpg')">
+<body style="background-image: url('/images/jimon_haru.jpg')">
 <div id="test" style="color: white">
     <h1 class="row-cols-3 offset-1">场馆公告:</h1>
     <list-item-post :posts="posts" class="offset-2"></list-item-post>
@@ -74,7 +74,7 @@
             <td>{{field.fieldHost}}</td>
             <td>{{field.fieldHostCall}}</td>
             <td>{{field.fieldRent}}</td>
-            <td><a href="" @click.prevent="">申请</a></td>
+            <td><a :href="'/field/fieldApplication/'+field.fieldId">申请</a></td>
         </tr>
         </tbody>
     </table>
@@ -98,32 +98,35 @@
             <td>{{equipment.equipmentNum}}</td>
             <td>{{equipment.equipmentRent}}</td>
             <td>{{equipment.equipmentBreakPrice}}</td>
-            <td><a href="" @click.prevent="">申请</a></td>
+            <td><a :href="'/equipment/equipmentApplication/'+equipment.equipmentId">申请</a></td>
         </tr>
         </tbody>
     </table>
 </template>
 
 <template id="ListItemCompetition">
-    <table class="table  table-striped table-hover">
-        <thead class="table-dark">
-        <tr style="font-size: 21px" class="text-info">
-            <!--                {componentName:'比赛一号',componentJudge:'Mrcccc',componentField:'场地大号'}-->
-            <th scope="col">比赛名</th>
-            <th scope="col">比赛裁判</th>
-<%--            <th scope="col">比赛场地</th>--%>
-<%--            <th scope="col">操作</th>--%>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="(competition,index) in competitions" :key="index" class="text-warning">
-            <td>{{competition.competitionName}}</td>
-            <td>{{competition.competitionJudge}}</td>
-<%--            <td>{{competition.competitionField}}</td>--%>
-<%--            <td><a href="" @click.prevent="">申请</a></td>--%>
-        </tr>
-        </tbody>
-    </table>
+    <div>
+        <table class="table  table-striped table-hover">
+            <thead class="table-dark">
+            <tr style="font-size: 21px" class="text-info">
+                <!--                {componentName:'比赛一号',componentJudge:'Mrcccc',componentField:'场地大号'}-->
+                <th scope="col">比赛名</th>
+                <th scope="col">比赛裁判</th>
+    <%--            <th scope="col">比赛场地</th>--%>
+    <%--            <th scope="col">操作</th>--%>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(competition,index) in competitions" :key="index" class="text-warning">
+                <td>{{competition.competitionName}}</td>
+                <td>{{competition.competitionJudge}}</td>
+    <%--            <td>{{competition.competitionField}}</td>--%>
+    <%--            <td><a href="" @click.prevent="">申请</a></td>--%>
+            </tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='/competition/competitionApplication'">我要申请赛事</button>
+    </div>
 </template>
 
 <!--    {applicationType:'场地',applicationName:'场地一号'}-->
@@ -219,14 +222,14 @@
             }
         }
         ,
-        watch:{
-            fieldss:{
-                deep:true
-            },
-            equipmentss: {
-                deep:true
-            }
-        },
+        // watch:{
+        //     fieldss:{
+        //         deep:true
+        //     },
+        //     equipmentss: {
+        //         deep:true
+        //     }
+        // },
         methods: {
             getFieldData() {
                 axios.get('http://localhost:8080/field/getFields').then(response=>{

@@ -25,7 +25,7 @@ public class EquipmentController {
     @RequestMapping("/equipmentApplication/{id}")
     public ModelAndView equipmentApplication(@PathVariable("id") Integer equipmentId){
         ModelAndView m = new ModelAndView();
-        m.setViewName("WEB-INF/jsp/fieldApplication");
+        m.setViewName("equipmentApplication");
         Equipment equipment = equipmentService.getEquipment(equipmentId);
         m.addObject("equipment",equipment);
         return m;

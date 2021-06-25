@@ -25,7 +25,7 @@ public class FieldController {
     @RequestMapping("/fieldApplication/{id}")
     public ModelAndView fieldApplication(@PathVariable("id") Integer fieldId){
         ModelAndView m = new ModelAndView();
-        m.setViewName("WEB-INF/jsp/fieldApplication");
+        m.setViewName("fieldApplication");
         Field field = fieldService.getField(fieldId);
         m.addObject("field",field);
         return m;

@@ -24,6 +24,6 @@ public class UserController{
     }
     @RequestMapping("/userMain")
     public String userMain(){
-        return "WEB-INF/jsp/usermain";
+        return "usermain";
     }
 }
