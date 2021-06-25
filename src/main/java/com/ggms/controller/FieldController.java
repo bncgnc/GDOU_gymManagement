@@ -1,6 +1,5 @@
 package com.ggms.controller;
 
-import com.ggms.mapper.FieldTimetableMapper;
 import com.ggms.pojo.Field;
 import com.ggms.pojo.FieldTimetable;
 import com.ggms.service.FieldService;
@@ -9,7 +8,6 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import java.util.List;
 
@@ -27,7 +25,7 @@ public class FieldController {
     @RequestMapping("/fieldApplication/{id}")
     public ModelAndView fieldApplication(@PathVariable("id") Integer fieldId){
         ModelAndView m = new ModelAndView();
-        m.setViewName("fieldApplication");
+        m.setViewName("WEB-INF/jsp/fieldApplication");
         Field field = fieldService.getField(fieldId);
         m.addObject("field",field);
         return m;

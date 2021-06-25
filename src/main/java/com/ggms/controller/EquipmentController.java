@@ -1,12 +1,10 @@
 package com.ggms.controller;
 
 import com.ggms.pojo.Equipment;
-import com.ggms.pojo.Field;
 import com.ggms.service.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,7 +25,7 @@ public class EquipmentController {
     @RequestMapping("/equipmentApplication/{id}")
     public ModelAndView equipmentApplication(@PathVariable("id") Integer equipmentId){
         ModelAndView m = new ModelAndView();
-        m.setViewName("fieldApplication");
+        m.setViewName("WEB-INF/jsp/fieldApplication");
         Equipment equipment = equipmentService.getEquipment(equipmentId);
         m.addObject("equipment",equipment);
         return m;
