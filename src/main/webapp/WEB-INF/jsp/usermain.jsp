@@ -12,17 +12,17 @@
     <meta charset="UTF-8">
     <title>Main</title>
 </head>
-<script src="https://cdn.bootcss.com/vue/2.5.22/vue.js"></script>
-<link type="text/css" rel="stylesheet" href="/css/bootstrap.css">
-<script language="JavaScript" src="/js/bootstrap.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script language="JavaScript" src="http://cdn.staticfile.org/moment.js/2.24.0/moment.js"></script>
-<style>
-    .active {
-        color: red !important;
-    }
-</style>
-<body style="background-image: url('/images/jimon_haru.jpg')">
+    <script src="https://cdn.bootcss.com/vue/2.5.22/vue.js"></script>
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+    <script language="JavaScript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script language="JavaScript" src="http://cdn.staticfile.org/moment.js/2.24.0/moment.js"></script>
+    <style>
+        .active {
+            color: red !important;
+        }
+    </style>
+<body style="background-image: url(${pageContext.request.contextPath}/images/jimon_haru.jpg)">
 <div id="test" style="color: white">
     <h1 class="row-cols-3 offset-1">场馆公告:</h1>
     <list-item-post :posts="posts" class="offset-2"></list-item-post>
@@ -74,7 +74,7 @@
             <td>{{field.fieldHost}}</td>
             <td>{{field.fieldHostCall}}</td>
             <td>{{field.fieldRent}}</td>
-            <td><a :href="'/field/fieldApplication/'+field.fieldId">申请</a></td>
+            <td><a :href="'${pageContext.request.contextPath}/field/fieldApplication/'+field.fieldId">申请</a></td>
         </tr>
         </tbody>
     </table>
@@ -98,7 +98,7 @@
             <td>{{equipment.equipmentNum}}</td>
             <td>{{equipment.equipmentRent}}</td>
             <td>{{equipment.equipmentBreakPrice}}</td>
-            <td><a :href="'/equipment/equipmentApplication/'+equipment.equipmentId">申请</a></td>
+            <td><a :href="'${pageContext.request.contextPath}/equipment/equipmentApplication/'+equipment.equipmentId">申请</a></td>
         </tr>
         </tbody>
     </table>
@@ -232,7 +232,7 @@
         // },
         methods: {
             getFieldData() {
-                axios.get('http://localhost:8080/field/getFields').then(response=>{
+                axios.get('${pageContext.request.contextPath}/field/getFields').then(response=>{
                     const result = response.data
                     const fields = result.map(item=>({
                         fieldId:item.fieldid,
@@ -248,7 +248,7 @@
 
             },
             getEquipmentData() {
-                axios.get('http://localhost:8080/equipment/getEquipments').then(response=>{
+                axios.get('${pageContext.request.contextPath}/equipment/getEquipments').then(response=>{
                     const result = response.data
                     const equipments = result.map(item=>({
                         equipmentId:item.equipmentid,
@@ -262,7 +262,7 @@
                 })
             },
             getCompetitionData() {
-                axios.get('http://localhost:8080/competition/getCompetitions').then(response=>{
+                axios.get('${pageContext.request.contextPath}/competition/getCompetitions').then(response=>{
                     const result = response.data
                     const competitions = result.map(item=>({
                         competitionId:item.competitionid,

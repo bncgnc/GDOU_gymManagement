@@ -16,7 +16,7 @@ import java.util.List;
 public class FieldController {
     @Autowired
     FieldService fieldService;
-    @RequestMapping("/getFields")
+    @RequestMapping(value = "/getFields")
     @ResponseBody
     public List<Field> getFields(){
         return fieldService.getFields(null);

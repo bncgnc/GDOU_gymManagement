@@ -32,7 +32,7 @@ public class UserController{
 
         if( loginUser != null ) { //成功登录
             if(loginUser.getUtype() == 0) {         //普通用户
-                mv.setViewName("index");
+                mv.setViewName("usermain");
             } else if (loginUser.getUtype() == 1) { //用户管理员
                 mv.setViewName("index");
             } else if (loginUser.getUtype() == 2) { //场地管理员

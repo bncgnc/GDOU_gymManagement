@@ -1,7 +1,10 @@
 package com.ggms.pojo;
 
+import org.springframework.stereotype.Repository;
+
 import java.io.Serializable;
 
+@Repository
 public class FieldApplication implements Serializable {
     private Integer fieldApplicationid;
 

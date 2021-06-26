@@ -21,15 +21,15 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script language="JavaScript" src="http://cdn.staticfile.org/moment.js/2.24.0/moment.js"></script>
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<body style="background-image: url('/images/jimon_haru.jpg')">
-<div style="width: 100%;height:160px;background-image: url('/images/bg23.png')">
+<body style="background-image: url(${pageContext.request.contextPath}/images/jimon_haru.jpg)">
+<div style="width: 100%;height:160px;background-image: url(${pageContext.request.contextPath}/images/bg23.png)">
     <h1 class="text-center text-primary">场地申请</h1>
 
 </div>
 <div style="height: 100%;width: 100%" id="app">
     <div class="container"
          style="margin-top: -60px;background:rgba(255,255,255,.2);height: 600px;box-shadow:5px 5px 8px 2px #666;">
-        <img src="/static/images/sd1.png" class="position-absolute">
+        <img src="${pageContext.request.contextPath}/images/sd1.png" class="position-absolute">
         <form class="container text-center" style="color: white;padding: 130px 0">
             <div class="row ">
                 <div class="col-6"><h3>场地名：${field.fname}</h3></div>
@@ -111,7 +111,7 @@
 
             const params = new URLSearchParams();
             params.append('fieldid', this.fieldid);
-                    axios.post('http://localhost:8080/field/getTimes',params).then(response=>{
+                    axios.post('${pageContext.request.contextPath}field/getTimes',params).then(response=>{
                         const item = response.data
                         this.times=item
                     })
