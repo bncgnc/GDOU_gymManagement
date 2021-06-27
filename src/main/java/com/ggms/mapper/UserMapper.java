@@ -1,7 +1,6 @@
 package com.ggms.mapper;
 
-import com.ggms.pojo.User;
-import com.ggms.pojo.UserExample;
+import com.ggms.pojo.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -30,4 +29,10 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    public List<SimpleCompetition> getApplicationCompetition(@Param("userid") String userid);
+
+    public List<SimpleField> getApplicationField(@Param("userid") String userid);
+
+    public List<SimpleEquipment> getApplicationEquipment(@Param("userid") String userid);
 }

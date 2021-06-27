@@ -19,7 +19,7 @@
 <script language="JavaScript" src="http://cdn.staticfile.org/moment.js/2.24.0/moment.js"></script>
 <body style="background-image: url(${pageContext.request.contextPath}/images/jimon_haru.jpg)">
 <div style="width: 100%;height:160px;background-image: url(${pageContext.request.contextPath}/images/bg2.png)">
-    <h1 class="text-center text-primary">器材申请</h1>
+    <h1 class="text-center text-primary">修改器材申请</h1>
 
 </div>
 <div style="height: 100%;width: 100%" id="app">
@@ -59,7 +59,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <h4 class="text-dark">是否要申请该器材？</h4>
+                            <h4 class="text-dark">是否要修改该器材？</h4>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
@@ -76,13 +76,13 @@
         el:'#app',
         data(){
             return {
-                rentNum:1,
+                rentNum:${equipmentApplication.eanum},
                 equipmentName:'',
                 equipmentId: 0,
                 equipmentRent: 0,
                 equipmentBreakPrice: 0,
                 equipmentNum:0,
-                rentTime:1,
+                rentTime:${equipmentApplication.eaplantime},
                 canRent:0
             }
         },
@@ -107,24 +107,24 @@
         methods:{
             doApplication() {
                 const params = new URLSearchParams();
-                params.append("equipmentid",this.equipmentId)
+                params.append("equipmentApplicationid",${equipmentApplication.equipmentApplicationid})
                 params.append("num",this.rentNum)
                 params.append("time",this.rentTime)
-                axios.post('${pageContext.request.contextPath}/equipment/applicateEquipment',params).then(response=>{
+                axios.post('${pageContext.request.contextPath}/equipment/updateEquipmentApplication',params).then(response=>{
                     const url = response.data
                     setTimeout(()=>{
-                        alert("预约成功")
-                        window.location.replace('${pageContext.request.contextPath}'+url)
+                        alert("修改成功")
+                        window.location.replace('${pageContext.request.contextPath}/user/userApplication')
                     },1666)
                 })
             }
         },
         mounted(){
             this.equipmentNum=${equipment.enums}
-            this.equipmentId=${equipment.equipmentid}
-            this.equipmentRent=${equipment.erent}
-            this.equipmentBreakPrice=${equipment.ebreakprice}
-            this.equipmentName='${equipment.ename}'
+                this.equipmentId=${equipment.equipmentid}
+                    this.equipmentRent=${equipment.erent}
+                        this.equipmentBreakPrice=${equipment.ebreakprice}
+                            this.equipmentName='${equipment.ename}'
             const params = new URLSearchParams();
             params.append('equipmentid',this.equipmentId)
             axios.post('${pageContext.request.contextPath}/equipment/getCanRent',params).then(response=>{

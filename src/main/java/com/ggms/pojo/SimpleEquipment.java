@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.io.Serializable;
 
 @Repository
-public class PermitedEquipment implements Serializable {
+public class SimpleEquipment implements Serializable {
     private Integer equipmentApplicationid;
 
     private Integer equipmentid;
@@ -25,6 +25,8 @@ public class PermitedEquipment implements Serializable {
     private Integer erent;
 
     private Integer ebreakprice;
+
+
 
     public Integer getEquipmentApplicationid() {
         return equipmentApplicationid;

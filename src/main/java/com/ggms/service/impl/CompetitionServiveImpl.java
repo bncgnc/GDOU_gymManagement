@@ -28,7 +28,7 @@ public class CompetitionServiveImpl implements CompetitionService {
     }
 
     @Override
-    public List<PermitedEquipment> getPermitEquipment(String userid) {
+    public List<SimpleEquipment> getPermitEquipment(String userid) {
         return competitionMapper.getPermitEquipment(userid);
     }
 
@@ -56,5 +56,22 @@ public class CompetitionServiveImpl implements CompetitionService {
     @Override
     public int deleteApplication(Integer competitionid) {
         return 0;
+    }
+
+    @Override
+    public Competition getCompetitionApplication(Integer id) {
+        return competitionMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void updateCompetitionApplication(Integer competitionid,Integer equipmentApplicationid, Integer fieldApplicationid, String judge, String cname) {
+        Competition competition = new Competition();
+        competition.setCapermit(0);
+        competition.setCjudge(judge);
+        competition.setCname(cname);
+        competition.setCompetitionid(competitionid);
+        competition.setFieldApplicationid(fieldApplicationid);
+        competition.setEquipmentApplicationid(equipmentApplicationid);
+        competitionMapper.updateByPrimaryKey(competition);
     }
 }

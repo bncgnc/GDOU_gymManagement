@@ -51,16 +51,6 @@
                 </div>
 
                 <h3>选择时间段</h3>
-<%--                <label style="display: block">--%>
-<%--                    <span class="badge bg-danger">已有预约</span><h5--%>
-<%--                        style="display: inline;margin-right: 30px;margin-left: 30px">9：00~10：00</h5><input--%>
-<%--                        type="checkbox" name="time" value="0">--%>
-<%--                </label>--%>
-<%--                <label style="display: block">--%>
-<%--                    <span class="badge bg-success">可预约</span><h5--%>
-<%--                        style="display: inline;margin-right: 30px;margin-left: 30px">9：00~10：00</h5><input--%>
-<%--                        type="checkbox" name="time" value="1">--%>
-<%--                </label>--%>
                 <label v-for="(time,index) in times" style="display: block">
                     <span v-show="disableTimes.indexOf(time.fieldTimetableid)!=-1" class="badge bg-danger">已有预约</span>
                     <span v-show="disableTimes.indexOf(time.fieldTimetableid)===-1" class="badge bg-success">可预约</span>
@@ -131,7 +121,7 @@
                     const url = response.data
                     setTimeout(()=>{
                         alert("预约成功")
-                        window.location.href = '${pageContext.request.contextPath}'+url
+                        window.location.replace ('${pageContext.request.contextPath}'+url)
                     },1666)
                 })
             }
@@ -144,13 +134,6 @@
                             this.fieldHostCall='${field.fhostcall}'
                                 this.fieldRent=${field.frent}
 
-
-            // const params = new URLSearchParams();
-            // params.append('fieldid', this.fieldid);
-            //         axios.post('http://localhost:8080/field/getTimes',params).then(response=>{
-            //             const item = response.data
-            //             this.times=item
-            //         })
             this.getTimes()
 
         }
