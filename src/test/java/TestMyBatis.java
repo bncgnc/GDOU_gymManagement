@@ -1,4 +1,4 @@
-import com.ggms.mapper.UserMapper;
+import com.ggms.mapper.FieldApplicationMapper;import com.ggms.mapper.UserMapper;
 import com.ggms.pojo.User;
 import com.ggms.utils.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -14,6 +14,7 @@ public class TestMyBatis {
     public void testMyBatis() {
         SqlSession session = MyBatisUtils.getSqlSession();
         UserMapper userMapper = session.getMapper(UserMapper.class);
+
 
         User user = new User();
         user.setUserid("201811701333");

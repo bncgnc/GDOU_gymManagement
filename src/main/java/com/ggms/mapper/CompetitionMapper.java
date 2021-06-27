@@ -2,6 +2,8 @@ package com.ggms.mapper;
 
 import com.ggms.pojo.Competition;
 import com.ggms.pojo.CompetitionExample;
+import com.ggms.pojo.PermitedEquipment;
+import com.ggms.pojo.SimpleField;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -31,5 +33,7 @@ public interface CompetitionMapper {
 
     int updateByPrimaryKey(Competition record);
 
-    
+    List<SimpleField> getPermitedField(String userid);
+
+    List<PermitedEquipment> getPermitEquipment(@Param("userid") String userid);
 }

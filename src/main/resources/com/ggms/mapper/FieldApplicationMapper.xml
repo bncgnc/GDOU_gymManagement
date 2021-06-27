@@ -101,10 +101,11 @@
   </delete>
   <insert id="insert" parameterType="com.ggms.pojo.FieldApplication">
     insert into field_application (field_applicationid, field_timetableid, 
-      userid, fapermit, fapaid
+      userid, fapermit, fapaid, fapdate
       )
     values (#{fieldApplicationid,jdbcType=INTEGER}, #{fieldTimetableid,jdbcType=INTEGER}, 
-      #{userid,jdbcType=VARCHAR}, #{fapermit,jdbcType=INTEGER}, #{fapaid,jdbcType=INTEGER}
+      #{userid,jdbcType=VARCHAR}, #{fapermit,jdbcType=INTEGER}, #{fapaid,jdbcType=INTEGER},
+      #{fapdate,jdbcType=DATE}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ggms.pojo.FieldApplication">
@@ -125,6 +126,9 @@
       <if test="fapaid != null">
         fapaid,
       </if>
+      <if test="fapdate != null">
+        fapdate,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="fieldApplicationid != null">
@@ -142,8 +146,20 @@
       <if test="fapaid != null">
         #{fapaid,jdbcType=INTEGER},
       </if>
+      <if test="fapdate != null">
+        #{fapdate,jdbcType=DATE},
+      </if>
     </trim>
   </insert>
+<!--  @Param("userid") String userid,@Param("fieldid") Integer fieldid,@Param("date") String date,@Param("time") List<Integer> time-->
+  <insert id="doApplication">
+    insert into field_application(field_timetableid,userid,fapermit,fapaid,fapdate)
+    values
+    <foreach collection="time" item="atime" separator=",">
+      (#{atime},#{userid},0,0,#{date})
+    </foreach>
+  </insert>
+
   <select id="countByExample" parameterType="com.ggms.pojo.FieldApplicationExample" resultType="java.lang.Long">
     select count(*) from field_application
     <if test="_parameter != null">
@@ -168,6 +184,9 @@
       <if test="record.fapaid != null">
         fapaid = #{record.fapaid,jdbcType=INTEGER},
       </if>
+      <if test="record.fapdate != null">
+        fapaid = #{record.fapdate,jdbcType=DATE},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -179,7 +198,8 @@
       field_timetableid = #{record.fieldTimetableid,jdbcType=INTEGER},
       userid = #{record.userid,jdbcType=VARCHAR},
       fapermit = #{record.fapermit,jdbcType=INTEGER},
-      fapaid = #{record.fapaid,jdbcType=INTEGER}
+      fapaid = #{record.fapaid,jdbcType=INTEGER},
+    fapdate = #{record.fapdate,jdbcType=DATE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -199,6 +219,9 @@
       <if test="fapaid != null">
         fapaid = #{fapaid,jdbcType=INTEGER},
       </if>
+      <if test="fapdate != null">
+        fapdate = #{fapdate,jdbcType=DATE},
+      </if>
     </set>
     where field_applicationid = #{fieldApplicationid,jdbcType=INTEGER}
   </update>
@@ -208,6 +231,7 @@
       userid = #{userid,jdbcType=VARCHAR},
       fapermit = #{fapermit,jdbcType=INTEGER},
       fapaid = #{fapaid,jdbcType=INTEGER}
+     fapdate = #{fapdate,jdbcType=DATE}
     where field_applicationid = #{fieldApplicationid,jdbcType=INTEGER}
   </update>
 </mapper>

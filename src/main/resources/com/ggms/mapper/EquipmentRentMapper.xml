@@ -88,6 +88,9 @@
     from equipment_rent
     where equipment_rentid = #{equipmentRentid,jdbcType=INTEGER}
   </select>
+  <select id="getCanRent" resultType="integer">
+    select enums-sum(eanum) from equipment as a join equipment_application as b on a.equipmentid=b.equipmentid where a.equipmentid=#{eid}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from equipment_rent
     where equipment_rentid = #{equipmentRentid,jdbcType=INTEGER}

@@ -8,6 +8,27 @@
     <result column="field_applicationid" jdbcType="INTEGER" property="fieldApplicationid" />
     <result column="equipment_applicationid" jdbcType="INTEGER" property="equipmentApplicationid" />
   </resultMap>
+  <resultMap id="SimpleField" type="com.ggms.pojo.SimpleField">
+    <result column="field_timetableid" jdbcType="INTEGER" property="fieldTimetableid" />
+    <result column="fieldid" jdbcType="VARCHAR" property="fieldid" />
+    <result column="fname" jdbcType="VARCHAR" property="fname" />
+    <result column="fapdate" jdbcType="INTEGER" property="fapdate" />
+    <result column="fapermit" jdbcType="INTEGER" property="fapermit" />
+    <result column="fdtime_start" jdbcType="INTEGER" property="fdtimeStart" />
+    <result column="fdtime_end" jdbcType="INTEGER" property="fdtimeEnd" />
+    <result column="field_applicationid" javaType="INTEGER" property="fieldApplicationid"/>
+  </resultMap>
+  <resultMap id="SimpleEquipment" type="com.ggms.pojo.PermitedEquipment">
+    <result column="equipmentid" jdbcType="VARCHAR" property="equipmentid" />
+    <result column="ename" jdbcType="VARCHAR" property="ename" />
+    <result column="enums" jdbcType="INTEGER" property="enums" />
+    <result column="ebreakprice" jdbcType="INTEGER" property="ebreakprice" />
+    <result column="equipment_applicationid" jdbcType="INTEGER" property="equipmentApplicationid" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="eaplantime" jdbcType="INTEGER" property="eaplantime" />
+    <result column="eanum" jdbcType="INTEGER" property="eanum" />
+    <result column="eapermit" jdbcType="INTEGER" property="eapermit" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -82,6 +103,14 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+  </select>
+  <select id="getPermitedField" resultMap="SimpleField">
+    SELECT b.field_timetableid,b.fieldid,c.fname,a.fapdate,a.fapermit,b.fdtime_start,b.fdtime_end,a.field_applicationid FROM field_application as a  join field_timetable as b on a.field_timetableid=b.field_timetableid
+    join field as c on b.fieldid=c.fieldid where userid=#{userid} and a.fapermit=1
+  </select>
+
+  <select id="getPermitEquipment" resultMap="SimpleEquipment">
+    SELECT a.equipmentid,ename,enums,erent,ebreakprice,equipment_applicationid,userid,eanum,eaplantime,eapermit FROM equipment as a join equipment_application as b on a.equipmentid=b.equipmentid where userid=#{userid} and eapermit=1;
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
