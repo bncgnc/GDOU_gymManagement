@@ -11,4 +11,12 @@ public interface EquipmentService {
     public List<Equipment> getEquipments(EquipmentExample equipmentExample);
 
     public Equipment getEquipment(Integer id);
+
+    int doApplication(Integer equipmentid, Integer num, Integer time,String userid);
+
+    Integer getCanRent(Integer eid);
+
+    public int changeApplication(Integer eapid,Integer equipmentid, Integer num, Integer time,String userid);
+
+    public int deleteApplication(Integer equipmentid);
 }

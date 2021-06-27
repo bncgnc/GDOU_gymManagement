@@ -43,8 +43,14 @@
                 <div class="col-6"><h3>场地负责人联系方式：${field.fhostcall}</h3></div>
             </div>
             <div style="margin-bottom: 30px">
-                <p>
-                <h3>选择时间段</h3></p>
+                <h3>选择日期</h3>
+                <div style="margin-bottom: 30px">
+                    <label style="display: block" class="form-label">
+                        <input type="date" class="form-control" style="width: 200px;display: inline"  v-model="selectTime" @change="getTimes()">
+                    </label>
+                </div>
+
+                <h3>选择时间段</h3>
 <%--                <label style="display: block">--%>
 <%--                    <span class="badge bg-danger">已有预约</span><h5--%>
 <%--                        style="display: inline;margin-right: 30px;margin-left: 30px">9：00~10：00</h5><input--%>
@@ -56,12 +62,15 @@
 <%--                        type="checkbox" name="time" value="1">--%>
 <%--                </label>--%>
                 <label v-for="(time,index) in times" style="display: block">
-                    <span class="badge bg-success">可预约</span> <h5
-                        style="display: inline;margin-right: 30px;margin-left: 30px">{{time.fdtimeStart | formatTime}}~{{time.fdtimeEnd | formatTime}}</h5><input
-                        type="checkbox" name="time" :value="time.fieldTimetableid">
+                    <span v-show="disableTimes.indexOf(time.fieldTimetableid)!=-1" class="badge bg-danger">已有预约</span>
+                    <span v-show="disableTimes.indexOf(time.fieldTimetableid)===-1" class="badge bg-success">可预约</span>
+                    <h5 style="display: inline;margin-right: 30px;margin-left: 30px">{{time.fdtimeStart | formatTime}}~{{time.fdtimeEnd | formatTime}}</h5><input
+                        type="checkbox" name="time" :value="time.fieldTimetableid" v-model="atime"  v-show="disableTimes.indexOf(time.fieldTimetableid)===-1">
                 </label>
             </div>
             <button type="button" class="btn btn-primary" id="a" data-bs-toggle="modal" data-bs-target="#staticBackdrop">提交</button>
+
+
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -74,7 +83,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary">确认</button>
+                            <button type="button" class="btn btn-primary" @click="doApplication()">确认</button>
                         </div>
                     </div>
                 </div>
@@ -95,10 +104,37 @@
                 fieldRent: 0,
                 fieldHost: '',
                 fieldHostCall: '',
-                times: []
+                times: [],
+                selectTime:moment(new Date()).format('YYYY-MM-DD'),
+                disableTimes:[],
+                atime:[]
             }
         },
         methods: {
+            getTimes(){
+                this.atime=[]
+                const params = new URLSearchParams()
+                params.append('fieldid', this.fieldid)
+                params.append('date',this.selectTime || moment(new Date()).format('YYYY-MM-DD'))
+                axios.post('${pageContext.request.contextPath}/field/getTimes',params).then(response=>{
+                    const item = response.data
+                    this.times=item.times
+                    this.disableTimes=item.disabletimes
+                })
+            },
+            doApplication(){
+                const params = new URLSearchParams();
+                params.append('fieldid',this.fieldid)
+                params.append("time",this.atime)
+                params.append("date",this.selectTime)
+                axios.post('${pageContext.request.contextPath}/field/applicateField',params).then(response=>{
+                    const url = response.data
+                    setTimeout(()=>{
+                        alert("预约成功")
+                        window.location.href = '${pageContext.request.contextPath}'+url
+                    },1666)
+                })
+            }
         },
         mounted() {
             this.fieldid=${field.fieldid}
@@ -109,12 +145,13 @@
                                 this.fieldRent=${field.frent}
 
 
-            const params = new URLSearchParams();
-            params.append('fieldid', this.fieldid);
-                    axios.post('${pageContext.request.contextPath}field/getTimes',params).then(response=>{
-                        const item = response.data
-                        this.times=item
-                    })
+            // const params = new URLSearchParams();
+            // params.append('fieldid', this.fieldid);
+            //         axios.post('http://localhost:8080/field/getTimes',params).then(response=>{
+            //             const item = response.data
+            //             this.times=item
+            //         })
+            this.getTimes()
 
         }
     })

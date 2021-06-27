@@ -3,6 +3,7 @@ package com.ggms.pojo;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 @Repository
 public class FieldApplication implements Serializable {
@@ -15,6 +16,8 @@ public class FieldApplication implements Serializable {
     private Integer fapermit;
 
     private Integer fapaid;
+
+    private String fapdate;
 
     private static final long serialVersionUID = 1L;
 
@@ -56,6 +59,14 @@ public class FieldApplication implements Serializable {
 
     public void setFapaid(Integer fapaid) {
         this.fapaid = fapaid;
+    }
+
+    public String getFapdate() {
+        return fapdate;
+    }
+
+    public void setFapdate(String fapdate) {
+        this.fapdate = fapdate;
     }
 
     @Override

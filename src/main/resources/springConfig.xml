@@ -25,6 +25,12 @@
         <property name="jdbcUrl" value="${jdbc.url}"/>
         <property name="user" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
+        <!-- 初始连接池大小 -->
+        <property name="initialPoolSize" value="10"/>
+        <!-- 连接池中连接最小个数 -->
+        <property name="minPoolSize" value="5"/>
+        <property name="maxPoolSize" value="20"/>
+
     </bean>
 
     <!-- 配置myBatis的SqlSession工厂，c3p0 -->
@@ -38,5 +44,7 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.ggms.mapper"/>
     </bean>
+
+
 
 </beans>

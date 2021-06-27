@@ -30,4 +30,6 @@ public interface EquipmentRentMapper {
     int updateByPrimaryKeySelective(EquipmentRent record);
 
     int updateByPrimaryKey(EquipmentRent record);
+
+    Integer getCanRent(Integer eid);
 }
