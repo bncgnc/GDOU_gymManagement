@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.ggms.pojo.FieldTimetable">
     <id column="field_timetableid" jdbcType="INTEGER" property="fieldTimetableid" />
     <result column="fieldid" jdbcType="INTEGER" property="fieldid" />
-    <result column="fdtime_start" jdbcType="DATE" property="fdtimeStart" />
-    <result column="fdtime_end" jdbcType="DATE" property="fdtimeEnd" />
+    <result column="fdtime_start" jdbcType="TIME" property="fdtimeStart" />
+    <result column="fdtime_end" jdbcType="TIME" property="fdtimeEnd" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
