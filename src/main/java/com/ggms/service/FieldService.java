@@ -1,8 +1,6 @@
 package com.ggms.service;
 
-import com.ggms.pojo.Field;
-import com.ggms.pojo.FieldExample;
-import com.ggms.pojo.FieldTimetable;
+import com.ggms.pojo.*;
 
 import java.util.Date;
 import java.util.List;
@@ -22,4 +20,19 @@ public interface FieldService {
 //    public int changeApplication(Integer fapid,String userid,Integer fieldid,String date,List<Integer> time);
 
     public int deleteApplication(Integer fieldApplicationid);
+
+
+    public List<Field> fuzzyFindField(String fieldExample);
+
+    public int insertField(Field field);
+
+    public void updateField(Field field);
+
+    public int deleteField(Integer fieldId);
+
+    public int insertFieldTimetable(FieldTimetable fieldTimetable);
+
+    public int deleteFieldTimetable(Integer fieldTimetableId);
+
+    public List<FieldApplication> findAllFieldApplication(FieldApplicationExample example);
 }

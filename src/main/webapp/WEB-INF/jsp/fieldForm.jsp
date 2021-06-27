@@ -8,34 +8,29 @@
     <title>场地表单</title>
 </head>
 <body>
-<div>
-<form action="" method="post" name="filedForm" >
-    <div align="center">场地id：<input name="filedId" type="number">
+<form action="${pageContext.request.contextPath}/field/fieldUpdate" method="post" name="filedForm" >
+    <div align="center">
+        场地编号：<input name="fieldid" id="fieldid" type="text" value="${field.fieldid}" readonly="readonly">
     </div>
     <div align="center">
-        场地名称：<input name="filedName" type="text">
+        场地名称：<input name="fname" id="fname" type="text" value="${field.fname}">
     </div>
     <div align="center">
-        场地地址：<input name="filedLocation" type="text">
-    </div>
-    <div align="center">场地开始时间：<input name="filedId" type="datetime-local">
+        场地地址：<input name="flocation" id="flocation" type="text" value="${field.flocation}">
     </div>
     <div align="center">
-        场地结束时间：<input name="filedName" type="datetime-local">
+        负责人：<input name="fhost" id="fhost" type="text" value="${field.fhost}">
     </div>
     <div align="center">
-        负责人：<input name="filedHost" type="text">
+        负责人电话：<input name="fhostcall" id="fhostcall" type="text" value="${field.fhostcall}">
     </div>
     <div align="center">
-        负责人电话：<input name="filedCall" type="tel">
+        场地租金：<input name="frent" id="frent" type="text" value="${field.frent}">
     </div>
     <div align="center">
-        场地租金：<input name="filedRent" type="text">
+        <button name="change">提交</button>
     </div>
-    <div align="center"><button name="change">确认修改</button><button name="return">返回</button> </div>
 </form>
-
-</div>
 
 </body>
 </html>

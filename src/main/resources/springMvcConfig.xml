@@ -13,6 +13,16 @@
     <!--使用注解驱动-->
     <mvc:annotation-driven></mvc:annotation-driven>
 
+    <!--String类型转换为Time的工具扫描-->
+    <mvc:annotation-driven conversion-service="customConversionService"></mvc:annotation-driven>
+    <bean id="customConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.ggms.utils.TimeFormatUtils"/>
+            </set>
+        </property>
+    </bean>
+
     <!-- 扫描包 -->
     <context:component-scan base-package="com.ggms"></context:component-scan>
 

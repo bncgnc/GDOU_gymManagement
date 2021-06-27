@@ -80,6 +80,7 @@ public class FieldApplication implements Serializable {
         sb.append(", userid=").append(userid);
         sb.append(", fapermit=").append(fapermit);
         sb.append(", fapaid=").append(fapaid);
+        sb.append(", fapdate=").append(fapdate);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
