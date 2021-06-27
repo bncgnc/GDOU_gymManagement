@@ -1,7 +1,6 @@
 package com.ggms.service;
 
-import com.ggms.pojo.User;
-import com.ggms.pojo.UserExample;
+import com.ggms.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -22,4 +21,16 @@ public interface UserService {
     public int deleteUserById(String userid);
 
     public void updateUser(User user);
+
+    public List<SimpleCompetition> getApplicationCompetition(String userid);
+
+    public List<SimpleField> getApplicationField(String userid);
+
+    public List<SimpleEquipment> getApplicationEquipment(String userid);
+
+    int deleteApplicateField(Integer applicationid);
+
+    int deleteApplicateEquipment(Integer applicationid);
+
+    int deleteApplicateCompetition(Integer applicationid);
 }

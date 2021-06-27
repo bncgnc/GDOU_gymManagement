@@ -10,6 +10,36 @@
     <result column="upassword" jdbcType="VARCHAR" property="upassword" />
     <result column="uphone" jdbcType="VARCHAR" property="uphone" />
   </resultMap>
+  <resultMap id="getApplicationField" type="com.ggms.pojo.SimpleField">
+    <result column="fname" jdbcType="VARCHAR" property="fname" />
+    <result column="fapdate" jdbcType="DATE" property="fapdate" />
+    <result column="fapermit" jdbcType="INTEGER" property="fapermit" />
+    <result column="fdtime_start" jdbcType="TIME" property="fdtimeStart" />
+    <result column="fdtime_end" jdbcType="TIME" property="fdtimeEnd" />
+    <result column="field_applicationid" jdbcType="INTEGER" property="fieldApplicationid" />
+    <result column="fhostcall" jdbcType="VARCHAR" property="fHostCall" />
+    <result column="frent" jdbcType="INTEGER" property="frent" />
+  </resultMap>
+  <resultMap id="getApplicationCompetition" type="com.ggms.pojo.SimpleCompetition">
+    <result column="fname" jdbcType="VARCHAR" property="fname" />
+    <result column="fdtime_start" jdbcType="TIME" property="start" />
+    <result column="fdtime_end" jdbcType="TIME" property="end" />
+    <result column="competitionid" jdbcType="INTEGER" property="competitionid" />
+    <result column="ename" jdbcType="VARCHAR" property="equipmentname" />
+    <result column="cname" jdbcType="VARCHAR" property="competitionname" />
+    <result column="cjudge" jdbcType="VARCHAR" property="judgename" />
+    <result column="capermit" jdbcType="INTEGER" property="isPermit" />
+    <result column="fapdate" jdbcType="DATE" property="date" />
+  </resultMap>
+  <resultMap id="getApplicationEquipment" type="com.ggms.pojo.SimpleEquipment">
+    <result column="equipment_applicationid" jdbcType="VARCHAR" property="equipmentApplicationid" />
+    <result column="eanum" jdbcType="INTEGER" property="eanum" />
+    <result column="eaplantime" jdbcType="INTEGER" property="eaplantime" />
+    <result column="eapermit" jdbcType="VARCHAR" property="eapermit" />
+    <result column="ename" jdbcType="VARCHAR" property="ename" />
+    <result column="erent" jdbcType="VARCHAR" property="erent" />
+    <result column="ebreakprice" jdbcType="VARCHAR" property="ebreakprice" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -68,6 +98,21 @@
       </foreach>
     </where>
   </sql>
+  <select id="getApplicationCompetition" resultMap="getApplicationCompetition">
+SELECT a.cjudge,a.cname,a.competitionid,a.capermit,b.fapdate,c.fdtime_start,c.fdtime_end,f.ename,d.fname FROM competition as a join field_application as b on a.field_applicationid=b.field_applicationid
+	join field_timetable as c on c.field_timetableid=b.field_timetableid
+    join field as d on d.fieldid=c.fieldid
+    join equipment_application as e on a.equipment_applicationid=e.equipment_applicationid
+    join equipment as f on f.equipmentid=e.equipmentid
+    where e.userid=#{userid}
+  </select>
+  <select id="getApplicationEquipment" resultMap="getApplicationEquipment">
+SELECT ename,erent,ebreakprice,equipment_applicationid,eanum,eaplantime,eapermit FROM equipment as a join equipment_application as b on a.equipmentid=b.equipmentid where userid=#{userid}
+  </select>
+  <select id="getApplicationField" resultMap="getApplicationField">
+        SELECT c.frent,c.fhostcall,c.fname,a.fapdate,a.fapermit,b.fdtime_start,b.fdtime_end,a.field_applicationid FROM field_application as a  join field_timetable as b on a.field_timetableid=b.field_timetableid
+    join field as c on b.fieldid=c.fieldid where userid=#{userid}
+  </select>
   <sql id="Base_Column_List">
     userid, uname, ucredit, utype, uunit, upassword, uphone
   </sql>
@@ -164,6 +209,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
   <update id="updateByExampleSelective" parameterType="map">
     update user
     <set>

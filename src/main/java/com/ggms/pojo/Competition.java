@@ -16,6 +16,17 @@ public class Competition implements Serializable {
 
     private Integer equipmentApplicationid;
 
+    private Integer capermit;
+
+
+    public Integer getCapermit() {
+        return capermit;
+    }
+
+    public void setCapermit(Integer capermit) {
+        this.capermit = capermit;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getCompetitionid() {

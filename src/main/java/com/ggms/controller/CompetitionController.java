@@ -1,8 +1,7 @@
 package com.ggms.controller;
 
 import com.ggms.pojo.Competition;
-import com.ggms.pojo.Equipment;
-import com.ggms.pojo.PermitedEquipment;
+import com.ggms.pojo.SimpleEquipment;
 import com.ggms.pojo.SimpleField;
 import com.ggms.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +48,7 @@ public class CompetitionController {
     }
     @RequestMapping("/getPermitEquipment")
     @ResponseBody
-    public List<PermitedEquipment> getPermitEquipment(@RequestParam("userid") String userid){
+    public List<SimpleEquipment> getPermitEquipment(@RequestParam("userid") String userid){
         return competitionService.getPermitEquipment(userid);
     }
     @RequestMapping("/applicateCompetition")
@@ -59,5 +58,10 @@ public class CompetitionController {
 //        String userid = user.getUserid();
         competitionService.doApplicate(fieldApplicationid,equipmentApplicationid,cname,judge);
         return "/user/userMain";
+    }
+    @RequestMapping("updateCompetitionApplication")
+    @ResponseBody
+    public void updateCompetitionApplication(@RequestParam("competitionid") Integer competitionid,@RequestParam("equipmentApplicationid") Integer equipmentApplicationid,@RequestParam("fieldApplicationid") Integer fieldApplicationid,@RequestParam("judge") String judge,@RequestParam("cname") String cname){
+            competitionService.updateCompetitionApplication(competitionid,equipmentApplicationid,fieldApplicationid,judge,cname);
     }
 }
