@@ -4,7 +4,6 @@ import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.Date;
 
 @Repository
 public class FieldTimetable implements Serializable {

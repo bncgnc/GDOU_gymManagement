@@ -54,4 +54,90 @@ public class FieldServiceImpl implements FieldService {
     }
 
 
+
+    @Override
+    public List<Field> fuzzyFindField(String fieldExample) {
+        FieldExample example = new FieldExample();
+
+        example.or().andFnameLike("%" + fieldExample + "%");
+        example.or().andFlocationLike("%" + fieldExample + "%");
+        example.or().andFhostLike("%" + fieldExample + "%");
+        example.or().andFhostcallLike("%" + fieldExample + "%");
+
+        List<Field> fields = fieldMapper.selectByExample(example);
+
+        if( fields.size() > 0 ){
+            return fields;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public int insertField(Field field) {
+        return fieldMapper.insert(field);
+    }
+
+    @Override
+    public void updateField(Field field) {
+        FieldExample example = new FieldExample();
+        FieldExample.Criteria criteria = example.createCriteria();
+
+        criteria.andFieldidEqualTo(field.getFieldid());
+
+        fieldMapper.updateByExample(field , example);
+    }
+
+    @Override
+    public int deleteField(Integer fieldId) {
+        FieldApplicationExample fieldApplicationExample = new FieldApplicationExample();
+        FieldTimetableExample fieldTimetableExample = new FieldTimetableExample();
+
+        FieldApplicationExample.Criteria criteria1 = fieldApplicationExample.createCriteria();
+        FieldTimetableExample.Criteria criteria2 = fieldTimetableExample.createCriteria();
+
+        //获取时间表中场地的所有时间
+        criteria2.andFieldidEqualTo(fieldId);
+
+        //获取对应场地时间的所有申请
+        List<FieldTimetable> fieldTimetables = fieldTimetableMapper.selectByExample(fieldTimetableExample);
+        for(int i = 0 ; i < fieldTimetables.size() ; i++) {
+            Integer fieldTimetableid = fieldTimetables.get(i).getFieldTimetableid();
+            criteria1.andFieldTimetableidEqualTo(fieldTimetableid);
+        }
+
+        fieldApplicationMapper.deleteByExample(fieldApplicationExample);
+        fieldTimetableMapper.deleteByExample(fieldTimetableExample);
+
+        return fieldMapper.deleteByPrimaryKey(fieldId);
+    }
+
+    @Override
+    public int insertFieldTimetable(FieldTimetable fieldTimetable) {
+        return fieldTimetableMapper.insert(fieldTimetable);
+    }
+
+    @Override
+    public int deleteFieldTimetable(Integer fieldTimetableId) {
+        FieldApplicationExample fieldApplicationExample = new FieldApplicationExample();
+        FieldApplicationExample.Criteria criteria = fieldApplicationExample.createCriteria();
+
+        criteria.andFieldTimetableidEqualTo(fieldTimetableId);
+
+        fieldApplicationMapper.deleteByExample(fieldApplicationExample);
+
+        return fieldTimetableMapper.deleteByPrimaryKey(fieldTimetableId);
+    }
+
+    @Override
+    public List<FieldApplication> findAllFieldApplication(FieldApplicationExample example) {
+        List<FieldApplication> fieldApplications = fieldApplicationMapper.selectByExample(example);
+
+        if ( fieldApplications.size() > 0 ) {
+            return fieldApplications;
+        } else {
+            return null;
+        }
+    }
+
 }

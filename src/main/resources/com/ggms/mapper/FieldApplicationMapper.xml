@@ -7,6 +7,7 @@
     <result column="userid" jdbcType="VARCHAR" property="userid" />
     <result column="fapermit" jdbcType="INTEGER" property="fapermit" />
     <result column="fapaid" jdbcType="INTEGER" property="fapaid" />
+    <result column="fapdate" jdbcType="DATE" property="fapdate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>

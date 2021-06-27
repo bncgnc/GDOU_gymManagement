@@ -4,6 +4,9 @@ import com.ggms.utils.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class TestMyBatis {
@@ -41,5 +44,20 @@ public class TestMyBatis {
         for(User u : users) {
             System.out.println(u);
         }
+    }
+
+    @Test
+    public void testTimeFormat() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+        String s = "12:22:00";
+
+        Date d = null;
+        try {
+            d = simpleDateFormat.parse(s);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Time time = new Time(d.getTime());
+        System.out.println(time.valueOf(s).toString());
     }
 }

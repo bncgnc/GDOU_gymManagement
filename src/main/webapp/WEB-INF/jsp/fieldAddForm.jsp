@@ -8,31 +8,29 @@
     <title>新建场地</title>
 </head>
 <body>
-<form action="" method="post" name="filedForm" >
-    <div align="center">场地id：<input name="filedId" type="number">
+<form action="${pageContext.request.contextPath}/field/fieldAdd" method="post" name="filedForm" >
+    <div align="center">
+        场地名称：<input name="fname" id="fname" type="text">
     </div>
     <div align="center">
-        场地名称：<input name="filedName" type="text">
+        场地地址：<input name="flocation" id="flocation" type="text">
     </div>
     <div align="center">
-        场地地址：<input name="filedLocation" type="text">
-    </div>
-    <div align="center">场地开始时间：<input name="filedId" type="datetime-local">
+        负责人：<input name="fhost" id="fhost" type="text">
     </div>
     <div align="center">
-        场地结束时间：<input name="filedName" type="datetime-local">
+        负责人电话：<input name="fhostcall" id="fhostcall" type="text">
     </div>
     <div align="center">
-        负责人：<input name="filedHost" type="text">
+        场地租金：<input name="frent" id="frent" type="text">
     </div>
     <div align="center">
-        负责人电话：<input name="filedCall" type="tel">
+        <button name="change">确认添加</button>
     </div>
-    <div align="center">
-        场地租金：<input name="filedRent" type="text">
-    </div>
-    <div align="center"><button name="change">确认添加</button><button name="return">返回</button> </div>
 </form>
+<div align="center">
+    <button onclick="location='${pageContext.request.contextPath}/field/fieldSelect'">返回</button>
+</div>
 
 </body>
 </html>

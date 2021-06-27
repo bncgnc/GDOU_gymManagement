@@ -42,7 +42,7 @@ public class UserController{
             } else if (loginUser.getUtype() == 1) { //用户管理员
                 mv.setViewName("redirect:/user/userSelect");
             } else if (loginUser.getUtype() == 2) { //场地管理员
-                mv.setViewName("index");
+                mv.setViewName("redirect:/field/fieldSelect");
             } else if (loginUser.getUtype() == 3) { //器材管理员
                 mv.setViewName("index");
             } else {                                //赛事管理员

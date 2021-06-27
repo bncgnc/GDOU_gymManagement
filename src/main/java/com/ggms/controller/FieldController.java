@@ -1,10 +1,12 @@
 package com.ggms.controller;
 
 import com.ggms.pojo.Field;
+import com.ggms.pojo.FieldApplication;
 import com.ggms.pojo.FieldTimetable;
 import com.ggms.pojo.User;
 import com.ggms.service.FieldService;
 import com.sun.media.jfxmedia.logging.Logger;
+import javafx.geometry.Pos;
 import org.apache.ibatis.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -24,6 +26,7 @@ import java.util.Map;
 public class FieldController {
     @Autowired
     FieldService fieldService;
+
     @RequestMapping(value = "/getFields")
     @ResponseBody
     public List<Field> getFields(){
@@ -53,4 +56,111 @@ public class FieldController {
         fieldService.doApplication("201811701316",fieldid,date,times);
         return "/user/userMain";
     }
+
+
+
+    @GetMapping("/fieldSelect")
+    public ModelAndView fieldSelect() {
+        ModelAndView mv = new ModelAndView();
+
+        List<Field> fields = fieldService.getFields(null);
+
+        mv.addObject("fieldList" , fields);
+        mv.setViewName("fieldManagerCheckTable");
+
+        return mv;
+    }
+
+    //模糊查询
+    @PostMapping("/fieldExampleSelect")
+    public ModelAndView fieldExampleSelect(String selectExample) {
+        ModelAndView mv = new ModelAndView();
+
+        List<Field> fields = fieldService.getFields(null);
+
+        if( !"".equals(selectExample) && !"查询条件".equals(selectExample) ){
+            fields = fieldService.fuzzyFindField(selectExample);
+        }
+
+        mv.addObject("fieldList" , fields);
+        mv.setViewName("fieldManagerCheckTable");
+
+        return mv;
+    }
+
+    @GetMapping("/toFieldAdd")
+    public String toFieldAdd() {
+        return "fieldAddForm";
+    }
+
+    @PostMapping("/fieldAdd")
+    public ModelAndView fieldAdd(Field field) {
+        ModelAndView mv = new ModelAndView();
+
+        fieldService.insertField(field);
+        mv.setViewName("redirect:/field/fieldSelect");
+
+        return mv;
+    }
+
+    @GetMapping("/toFieldUpdate/{fieldId}")
+    public ModelAndView toFieldUpdate(@PathVariable("fieldId")Integer fieldId) {
+        ModelAndView mv = new ModelAndView();
+
+        Field curField = fieldService.getField(fieldId);
+        mv.addObject("field" , curField);
+        mv.setViewName("fieldForm");
+
+        return mv;
+    }
+
+    @PostMapping("/fieldUpdate")
+    public String fieldUpdate(Field field) {
+        fieldService.updateField(field);
+        return "redirect:/field/fieldSelect";
+    }
+
+    @GetMapping("/fieldRemove/{fieldId}")
+    public String fieldRemove(@PathVariable("fieldId")Integer fieldId) {
+        fieldService.deleteField(fieldId);
+        return "redirect:/field/fieldSelect";
+    }
+
+    @GetMapping("/toFieldTimetable/{fieldId}")
+    public ModelAndView toFieldTimetable(@PathVariable("fieldId")Integer fieldId) {
+        ModelAndView mv = new ModelAndView();
+
+        List<FieldTimetable> fieldTimes = fieldService.getFieldTimes(fieldId);
+        mv.addObject("curFieldId" , fieldId);
+        mv.addObject("fieldTime" , fieldTimes);
+        mv.setViewName("fieldTimeTableCheck");
+
+        return mv;
+    }
+
+    @PostMapping("/fieldTimetableAdd")
+    public String fieldTimetableAdd(FieldTimetable fieldTimetable) {
+        fieldService.insertFieldTimetable(fieldTimetable);
+        return "redirect:/field/toFieldTimetable/"+fieldTimetable.getFieldid();
+    }
+
+    @GetMapping("/fieldTimetableRemove/{fieldTimetableId}&{fieldId}")
+    public String fieldTimetableRemove(@PathVariable("fieldTimetableId")Integer fieldTimetableId , @PathVariable("fieldId")Integer fieldId) {
+        int column = fieldService.deleteFieldTimetable(fieldTimetableId);
+        return "redirect:/field/toFieldTimetable/" + fieldId;
+    }
+
+    @GetMapping("/fieldApplicationSelect")
+    public ModelAndView toFieldApplication() {
+        ModelAndView mv = new ModelAndView();
+
+        List<FieldApplication> fieldApplications = fieldService.findAllFieldApplication(null);
+
+        mv.addObject("fieldApplications" , fieldApplications);
+        mv.setViewName("fieldApplicationTable");
+
+        return mv;
+    }
+
+
 }
