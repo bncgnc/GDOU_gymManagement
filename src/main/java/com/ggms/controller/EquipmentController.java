@@ -45,4 +45,9 @@ public class EquipmentController {
     public @ResponseBody Integer getCanRent(@RequestParam("equipmentid") Integer eid){
         return equipmentService.getCanRent(eid);
     }
+    @RequestMapping("/updateEquipmentApplication")
+    @ResponseBody
+    public void updateEquipmentApplication(@RequestParam("equipmentApplicationid") Integer applicationid, @RequestParam("num")Integer num, @RequestParam("time")Integer time){
+        equipmentService.updateEquipmentApplication(applicationid,num,time);
+    }
 }

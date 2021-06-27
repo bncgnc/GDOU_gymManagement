@@ -11,7 +11,7 @@ public interface CompetitionService {
 
     public List<SimpleField> getPermitedField(String userid);
 
-    public List<PermitedEquipment> getPermitEquipment(String userid);
+    public List<SimpleEquipment> getPermitEquipment(String userid);
 
     public int doApplicate(Integer fapid,Integer eapid,String name,String judge);
 
@@ -19,4 +19,7 @@ public interface CompetitionService {
 
     public int deleteApplication(Integer competitionid);
 
+    public Competition getCompetitionApplication(Integer id);
+
+    void updateCompetitionApplication(Integer competitionid,Integer equipmentApplicationid, Integer fieldApplicationid, String judge, String cname);
 }

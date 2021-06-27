@@ -1,6 +1,8 @@
 package com.ggms.controller;
 
-import com.ggms.pojo.User;
+import com.ggms.pojo.*;
+import com.ggms.service.CompetitionService;
+import com.ggms.service.EquipmentService;
 import com.ggms.service.UserService;
 import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,10 @@ import java.util.List;
 public class UserController{
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private EquipmentService equipmentService;
+    @Autowired
+    private CompetitionService competitionService;
     @GetMapping(value = "/toUserLogin")
     public String toUserLogin(){
         return "login";
@@ -151,5 +156,75 @@ public class UserController{
     public String userUpdate(User user) {
         userService.updateUser(user);
         return "redirect:/user/userSelect";
+    }
+
+    @GetMapping("/userApplication")
+    public String userApplication(HttpSession session) {
+
+        return "userApplication";
+    }
+
+    @GetMapping("/getApplicationField")
+    @ResponseBody
+    public List<SimpleField> getApplicationField(HttpSession session){
+//        User user = (User)session.getAttribute("user");
+//        String userid = user.getUserid();
+        return userService.getApplicationField("201811701316");
+    }
+
+    @GetMapping("/getApplicationEquipment")
+    @ResponseBody
+    public List<SimpleEquipment> getApplicationEquipment(HttpSession session){
+//        User user = (User)session.getAttribute("user");
+//        String userid = user.getUserid();
+        return userService.getApplicationEquipment("201811701316");
+    }
+
+
+    @GetMapping("/getApplicationCompetition")
+    @ResponseBody
+    public List<SimpleCompetition> getApplicationCompetition(HttpSession session){
+//        User user = (User)session.getAttribute("user");
+//        String userid = user.getUserid();
+        return userService.getApplicationCompetition("201811701316");
+    }
+    @PostMapping("/deleteApplicateField")
+    @ResponseBody
+    public Integer deleteApplicateField(@RequestParam("id") Integer applicationid){
+        return userService.deleteApplicateField(applicationid);
+    }
+
+    @PostMapping("/deleteApplicateEquipment")
+    @ResponseBody
+    public Integer deleteApplicateEquipment(@RequestParam("id") Integer applicationid){
+        return userService.deleteApplicateEquipment(applicationid);
+    }
+    @PostMapping("/deleteApplicateCompetition")
+    @ResponseBody
+    public void deleteApplicateCompetition(@RequestParam("id") Integer applicationid){
+        userService.deleteApplicateCompetition(applicationid);
+    }
+
+
+    @RequestMapping("/updateApplicationEquipment/{id}")
+    public ModelAndView updateEquipmentApplication (@PathVariable("id") Integer id, ModelAndView modelAndView) {
+        //        User user = (User)session.getAttribute("user");
+//        String userid = user.getUserid();
+        EquipmentApplication equipmentApplication = equipmentService.getEquipmentApplication(id);
+        Equipment equipment = equipmentService.getEquipment(equipmentApplication.getEquipmentid());
+        modelAndView.addObject("equipment",equipment);
+        modelAndView.addObject("equipmentApplication",equipmentApplication);
+        modelAndView.setViewName("equipmentApplicationUpdate");
+        return modelAndView;
+    }
+
+    @RequestMapping("/updateApplicationCompetition/{id}")
+    public ModelAndView updateCompetitionApplication (@PathVariable("id") Integer id, ModelAndView modelAndView) {
+        //        User user = (User)session.getAttribute("user");
+//        String userid = user.getUserid();
+        Competition competition = competitionService.getCompetitionApplication(id);
+        modelAndView.setViewName("competitionApplicationUpdate");
+        modelAndView.addObject("competition",competition);
+        return modelAndView;
     }
 }

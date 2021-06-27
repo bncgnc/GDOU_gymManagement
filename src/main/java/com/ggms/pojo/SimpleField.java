@@ -23,6 +23,36 @@ public class SimpleField implements Serializable {
 
     private Integer fieldApplicationid;
 
+    private Integer isPermit;
+
+    private String fHostCall;
+
+    private Integer frent;
+
+    public Integer getFrent() {
+        return frent;
+    }
+
+    public void setFrent(Integer frent) {
+        this.frent = frent;
+    }
+
+    public String getfHostCall() {
+        return fHostCall;
+    }
+
+    public void setfHostCall(String fHostCall) {
+        this.fHostCall = fHostCall;
+    }
+
+    public Integer getIsPermit() {
+        return isPermit;
+    }
+
+    public void setIsPermit(Integer isPermit) {
+        this.isPermit = isPermit;
+    }
+
     public Integer getFieldApplicationid() {
         return fieldApplicationid;
     }

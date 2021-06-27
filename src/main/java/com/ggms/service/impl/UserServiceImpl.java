@@ -22,6 +22,8 @@ public class UserServiceImpl implements UserService {
     private EquipmentApplicationMapper equipmentApplicationMapper;
     @Autowired
     private FieldApplicationMapper fieldApplicationMapper;
+    @Autowired
+    private CompetitionMapper competitionMapper;
 
     @Override
     public List<User> findAllUser(UserExample example) {
@@ -106,5 +108,57 @@ public class UserServiceImpl implements UserService {
         criteria.andUseridEqualTo(user.getUserid());
 
         userMapper.updateByExample(user , example);
+    }
+
+    @Override
+    public List<SimpleCompetition> getApplicationCompetition(String userid) {
+        return userMapper.getApplicationCompetition(userid);
+    }
+
+    @Override
+    public List<SimpleField> getApplicationField(String userid) {
+        return userMapper.getApplicationField(userid);
+    }
+
+    @Override
+    public List<SimpleEquipment> getApplicationEquipment(String userid) {
+        return userMapper.getApplicationEquipment(userid);
+    }
+
+    @Override
+    public int deleteApplicateField(Integer applicationid) {
+        CompetitionExample example = new CompetitionExample();
+        CompetitionExample.Criteria criteria = example.createCriteria();
+        criteria.andFieldApplicationidEqualTo(applicationid);
+        List<Competition> list= competitionMapper.selectByExample(example);
+        if (list.size()>0){
+            //已经有比赛用这个场地
+            return 0;
+        }
+        else{
+            fieldApplicationMapper.deleteByPrimaryKey(applicationid);
+            return 1;
+        }
+    }
+
+    @Override
+    public int deleteApplicateEquipment(Integer applicationid) {
+        CompetitionExample example = new CompetitionExample();
+        CompetitionExample.Criteria criteria = example.createCriteria();
+        criteria.andEquipmentApplicationidEqualTo(applicationid);
+        List<Competition> list= competitionMapper.selectByExample(example);
+        if (list.size()>0){
+            //已经有比赛用这个器材
+            return 0;
+        }
+        else{
+            equipmentApplicationMapper.deleteByPrimaryKey(applicationid);
+            return 1;
+        }
+    }
+
+    @Override
+    public int deleteApplicateCompetition(Integer applicationid) {
+        return competitionMapper.deleteByPrimaryKey(applicationid);
     }
 }

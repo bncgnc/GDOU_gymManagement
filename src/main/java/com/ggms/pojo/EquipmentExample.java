@@ -3,7 +3,8 @@ package com.ggms.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EquipmentExample {
+public class
+EquipmentExample {
     protected String orderByClause;
 
     protected boolean distinct;
