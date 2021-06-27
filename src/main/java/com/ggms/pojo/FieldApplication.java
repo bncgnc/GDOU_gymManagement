@@ -17,7 +17,7 @@ public class FieldApplication implements Serializable {
 
     private Integer fapaid;
 
-    private String fapdate;
+    private Date fapdate;
 
     private static final long serialVersionUID = 1L;
 
@@ -61,11 +61,11 @@ public class FieldApplication implements Serializable {
         this.fapaid = fapaid;
     }
 
-    public String getFapdate() {
+    public Date getFapdate() {
         return fapdate;
     }
 
-    public void setFapdate(String fapdate) {
+    public void setFapdate(Date fapdate) {
         this.fapdate = fapdate;
     }
 

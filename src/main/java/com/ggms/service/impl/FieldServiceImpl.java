@@ -7,9 +7,7 @@ import com.ggms.pojo.*;
 import com.ggms.service.FieldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 @Service
 public class FieldServiceImpl implements FieldService {
@@ -138,6 +136,58 @@ public class FieldServiceImpl implements FieldService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<FieldApplication> fuzzyFindFieldApplication(String selectExample) {
+        FieldApplicationExample fieldApplicationExample = new FieldApplicationExample();
+
+        fieldApplicationExample.or().andUseridLike("%" + selectExample + "%");
+        if( "未审核".equals(selectExample) ) {
+            fieldApplicationExample.or().andFapermitEqualTo(0);
+        } else if( "申请通过".equals(selectExample) ) {
+            fieldApplicationExample.or().andFapermitEqualTo(1);
+        } else if( "申请驳回".equals(selectExample) ) {
+            fieldApplicationExample.or().andFapermitEqualTo(2);
+        }
+
+        if( "未付款".equals(selectExample) ) {
+            fieldApplicationExample.or().andFapaidEqualTo(0);
+        } else if( "已付款".equals(selectExample) ) {
+            fieldApplicationExample.or().andFapaidEqualTo(1);
+        }
+
+        List<FieldApplication> fieldApplications = fieldApplicationMapper.selectByExample(fieldApplicationExample);
+
+        if ( fieldApplications.size() > 0 ) {
+            return fieldApplications;
+        }else {
+            return null;
+        }
+    }
+
+    @Override
+    public void fieldApplicationPermit(Integer fieldApplicationId) {
+        FieldApplication fieldApplication = fieldApplicationMapper.selectByPrimaryKey(fieldApplicationId);
+        fieldApplication.setFapermit(1);
+
+        fieldApplicationMapper.updateByPrimaryKey(fieldApplication);
+    }
+
+    @Override
+    public void fieldApplicationRefuse(Integer fieldApplicationId) {
+        FieldApplication fieldApplication = fieldApplicationMapper.selectByPrimaryKey(fieldApplicationId);
+        fieldApplication.setFapermit(2);
+
+        fieldApplicationMapper.updateByPrimaryKey(fieldApplication);
+    }
+
+    @Override
+    public void fieldApplicationPaid(Integer fieldApplicationId) {
+        FieldApplication fieldApplication = fieldApplicationMapper.selectByPrimaryKey(fieldApplicationId);
+        fieldApplication.setFapaid(1);
+
+        fieldApplicationMapper.updateByPrimaryKey(fieldApplication);
     }
 
 }

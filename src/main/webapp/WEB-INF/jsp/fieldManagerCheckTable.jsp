@@ -16,7 +16,7 @@
         <input type="text" name="selectExample" placeholder="查询条件"/>
         <input type="submit" value="查询">
     </form>
-    <button onclick="location='toFieldApplication'" >查看场地申请</button>
+    <button onclick="location='fieldApplicationSelect'" >查看场地申请</button>
     <button onclick="location='toFieldAdd'">添加场地</button>
 </div>
 <div align="center">

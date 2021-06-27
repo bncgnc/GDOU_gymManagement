@@ -162,5 +162,37 @@ public class FieldController {
         return mv;
     }
 
+    @PostMapping("/fieldApplicationExampleSelect")
+    public ModelAndView fieldApplicationExampleSelect(String selectExample) {
+        ModelAndView mv = new ModelAndView();
 
+        List<FieldApplication> fieldApplications = fieldService.findAllFieldApplication(null);
+
+        if( !"".equals(selectExample) && !"查询条件".equals(selectExample) ) {
+            fieldApplications = fieldService.fuzzyFindFieldApplication(selectExample);
+        }
+
+        mv.addObject("fieldApplications" , fieldApplications);
+        mv.setViewName("fieldApplicationTable");
+
+        return mv;
+    }
+
+    @GetMapping("/fieldApplicationPermit/{fieldApplicationId}")
+    public String fieldApplicationPermit(@PathVariable("fieldApplicationId") Integer fieldApplicationId) {
+        fieldService.fieldApplicationPermit(fieldApplicationId);
+        return "redirect:/field/fieldApplicationSelect";
+    }
+
+    @GetMapping("/fieldApplicationRefuse/{fieldApplicationId}")
+    public String fieldApplicationRefuse(@PathVariable("fieldApplicationId") Integer fieldApplicationId) {
+        fieldService.fieldApplicationRefuse(fieldApplicationId);
+        return "redirect:/field/fieldApplicationSelect";
+    }
+
+    @GetMapping("/fieldApplicationPaid/{fieldApplicationId}")
+    public String fieldApplicationPaid(@PathVariable("fieldApplicationId") Integer fieldApplicationId) {
+        fieldService.fieldApplicationPaid(fieldApplicationId);
+        return "redirect:/field/fieldApplicationSelect";
+    }
 }

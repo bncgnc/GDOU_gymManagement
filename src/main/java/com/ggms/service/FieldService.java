@@ -35,4 +35,12 @@ public interface FieldService {
     public int deleteFieldTimetable(Integer fieldTimetableId);
 
     public List<FieldApplication> findAllFieldApplication(FieldApplicationExample example);
+
+    public List<FieldApplication> fuzzyFindFieldApplication(String selectExample);
+
+    public void fieldApplicationPermit(Integer fieldApplicationId);
+
+    public void fieldApplicationRefuse(Integer fieldApplicationId);
+
+    public void fieldApplicationPaid(Integer fieldApplicationId);
 }
