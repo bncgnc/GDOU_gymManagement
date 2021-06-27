@@ -9,6 +9,8 @@ import java.util.List;
 public interface UserService {
     public List<User> findAllUser(UserExample example);
 
+    public List<User> fuzzyFindUser(String selectExample);
+
     public User login(String userid , String password);
 
     public void register(User user);
@@ -16,4 +18,8 @@ public interface UserService {
     public User findUserById(String userid);
 
     public int insertUser(User record);
+
+    public int deleteUserById(String userid);
+
+    public void updateUser(User user);
 }
