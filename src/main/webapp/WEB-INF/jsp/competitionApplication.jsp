@@ -151,6 +151,10 @@
                 })
             },
             doApplication(){
+                    if(this.judgename==='' && this.competitionname===''){
+                        alert("裁判名，比赛名不能为空")
+                        return
+                    }
                     const params = new URLSearchParams();
                     params.append('equipmentApplicationid',this.nowSelectEquipment)
                     params.append("fieldApplicationid",this.nowSelectFieldApplication)
