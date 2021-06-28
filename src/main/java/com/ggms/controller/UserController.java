@@ -44,9 +44,9 @@ public class UserController{
             } else if (loginUser.getUtype() == 2) { //场地管理员
                 mv.setViewName("redirect:/field/fieldSelect");
             } else if (loginUser.getUtype() == 3) { //器材管理员
-                mv.setViewName("index");
+                mv.setViewName("redirect:/equipment/equipmentSelect");
             } else {                                //赛事管理员
-                mv.setViewName("index");
+                mv.setViewName("redirect:/competition/competitionSelect");
             }
 
             //登录,放入session域
