@@ -39,7 +39,8 @@ public class CompetitionServiveImpl implements CompetitionService {
         competition.setCname(name);
         competition.setEquipmentApplicationid(eapid);
         competition.setFieldApplicationid(fapid);
-        return competitionMapper.insert(competition);
+        competition.setCapermit(0);
+        return competitionMapper.insertSelective(competition);
     }
 
     @Override

@@ -10,7 +10,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Main</title>
+    <title>用户主界面</title>
 </head>
 <script src="https://cdn.bootcss.com/vue/2.5.22/vue.js"></script>
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">

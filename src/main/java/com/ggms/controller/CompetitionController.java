@@ -6,10 +6,16 @@ import com.ggms.pojo.SimpleField;
 import com.ggms.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+
 import java.util.List;
 
 @Controller
@@ -23,15 +29,6 @@ public class CompetitionController {
     public List<Competition> getCompetitions(){
         return competitionService.getCompetitions(null);
     }
-
-/*    @RequestMapping("/competitionApplication/{id}")
-    public ModelAndView competitionApplication(@PathVariable("id") Integer competitionId){
-        ModelAndView m = new ModelAndView();
-        m.setViewName("WEB-INF/jsp/competitionApplication");
-        Competition competition = competitionService.getCompetition(competitionId);
-        m.addObject("competition",competition);
-        return m;
-    }*/
 
         @RequestMapping("/competitionApplication")
     public String competitionApplication(){
@@ -50,9 +47,7 @@ public class CompetitionController {
     }
     @RequestMapping("/applicateCompetition")
     @ResponseBody
-    public String doApplication(HttpSession session,@RequestParam("equipmentApplicationid") Integer equipmentApplicationid,@RequestParam("fieldApplicationid") Integer fieldApplicationid,@RequestParam("judge") String judge,@RequestParam("cname") String cname){
-        //        User user = (User)session.getAttribute("user");
-//        String userid = user.getUserid();
+    public String doApplication(@RequestParam("equipmentApplicationid") Integer equipmentApplicationid,@RequestParam("fieldApplicationid") Integer fieldApplicationid,@RequestParam("judge") String judge,@RequestParam("cname") String cname){
         competitionService.doApplicate(fieldApplicationid,equipmentApplicationid,cname,judge);
         return "/user/userMain";
     }

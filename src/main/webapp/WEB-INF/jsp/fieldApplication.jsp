@@ -10,7 +10,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>用户场地预约页面</title>
 </head>
 <script src="${pageContext.request.contextPath}/js/vue.js"></script>
 

@@ -36,9 +36,9 @@ public class EquipmentController {
 
     @RequestMapping("/applicateEquipment")
     public @ResponseBody String applicateEquipment(HttpSession session, @RequestParam("equipmentid") Integer equipmentid, @RequestParam("num")Integer num, @RequestParam("time")Integer time){
-//        User user = (User)session.getAttribute("user");
-//        String userid = user.getUserid();
-        equipmentService.doApplication(equipmentid,num,time,"201811701316");
+        User user = (User)session.getAttribute("user");
+        String userid = user.getUserid();
+        equipmentService.doApplication(equipmentid,num,time,userid);
         return "/user/userMain";
     }
     @RequestMapping("/getCanRent")
