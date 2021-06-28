@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    field_applicationid, field_timetableid, userid, fapermit, fapaid
+    field_applicationid, field_timetableid, userid, fapermit, fapaid ,fapdate
   </sql>
   <select id="selectByExample" parameterType="com.ggms.pojo.FieldApplicationExample" resultMap="BaseResultMap">
     select
@@ -231,7 +231,7 @@
     set field_timetableid = #{fieldTimetableid,jdbcType=INTEGER},
       userid = #{userid,jdbcType=VARCHAR},
       fapermit = #{fapermit,jdbcType=INTEGER},
-      fapaid = #{fapaid,jdbcType=INTEGER}
+      fapaid = #{fapaid,jdbcType=INTEGER},
      fapdate = #{fapdate,jdbcType=DATE}
     where field_applicationid = #{fieldApplicationid,jdbcType=INTEGER}
   </update>
