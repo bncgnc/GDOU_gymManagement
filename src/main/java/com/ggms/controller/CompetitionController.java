@@ -6,13 +6,9 @@ import com.ggms.pojo.SimpleField;
 import com.ggms.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -44,9 +40,7 @@ public class CompetitionController {
     }
     @RequestMapping("/applicateCompetition")
     @ResponseBody
-    public String doApplication(HttpSession session,@RequestParam("equipmentApplicationid") Integer equipmentApplicationid,@RequestParam("fieldApplicationid") Integer fieldApplicationid,@RequestParam("judge") String judge,@RequestParam("cname") String cname){
-        //        User user = (User)session.getAttribute("user");
-//        String userid = user.getUserid();
+    public String doApplication(@RequestParam("equipmentApplicationid") Integer equipmentApplicationid,@RequestParam("fieldApplicationid") Integer fieldApplicationid,@RequestParam("judge") String judge,@RequestParam("cname") String cname){
         competitionService.doApplicate(fieldApplicationid,equipmentApplicationid,cname,judge);
         return "/user/userMain";
     }

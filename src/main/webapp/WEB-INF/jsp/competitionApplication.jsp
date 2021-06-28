@@ -10,7 +10,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>赛事预约页面</title>
 </head>
 <script src="https://cdn.bootcss.com/vue/2.5.22/vue.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -59,9 +59,6 @@
                     <label style="display: block" class="form-label">
                         <span>场地：</span><select class="form-select" v-model="nowSelectFieldApplication"  style="width: 300px;display: inline">
                         <option selected>选择时间</option>
-<%--                        <option value="1">One</option>--%>
-<%--                        <option value="2">Two</option>--%>
-<%--                        <option value="3">Three</option>--%>
                         <option v-if="field.fieldid===nowSelectField" :value="field.fieldApplicationid" v-for="(field,index) in fields">{{field.start | formatTime}}~{{field.end | formatTime}}</option>
                     </select>
                     </label>
@@ -72,8 +69,6 @@
                 <label style="display: block" class="form-label">
                     <span>器材：</span><select class="form-select" v-model="nowSelectEquipment" style="width: 300px;display: inline">
                     <option selected value="0">选择器材</option>
-<%--                    <option value="1">One</option>--%>
-<%--                    <option value="2">Two</option>--%>
                     <option :value="equipment.equipmentApplicationid" v-for="(equipment,index) in equipments" :key="equipment.equipmentApplicationid">{{equipment.ename}}------{{equipment.eanum}}个</option>
                 </select>
                 </label>
@@ -179,11 +174,6 @@
                 // 去重
                 return this.fields.filter((item)=>!map.has(item.fieldid) && map.set(item.fieldid,1))
             },
-/*            simpleEquipment(){
-                const map = new Map()
-                // 去重
-                return this.equipments.filter((item)=>!map.has(item.equipmentid) && map.set(item.equipmentid,1))
-            }*/
         }
 
     })

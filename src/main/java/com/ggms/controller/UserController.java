@@ -3,11 +3,9 @@ package com.ggms.controller;
 import com.ggms.pojo.*;
 import com.ggms.service.CompetitionService;
 import com.ggms.service.EquipmentService;
-import com.ggms.service.UserService;
-import javafx.geometry.Pos;
+import com.ggms.service.UserService;;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
