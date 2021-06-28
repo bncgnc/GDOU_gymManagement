@@ -88,7 +88,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <h4 class="text-dark">是否要申请比赛？</h4>
+                            <h4 class="text-dark">是否要修改比赛？</h4>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
@@ -120,8 +120,8 @@
         methods:{
             getSimpleField(){
                 const params = new URLSearchParams();
-                <%--params.append("userid",${user.userid})--%>
-                params.append("userid","201811701316")
+                params.append("userid",${user.userid})
+                // params.append("userid","201811701316")
                 axios.post('${pageContext.request.contextPath}/competition/getSimpleField',params).then(response=>{
                     const items = response.data
                     this.fields = items.map(item=>({
@@ -137,8 +137,8 @@
             },
             getSimpleEquipment(){
                 const params = new URLSearchParams();
-                <%--params.append("userid",${user.userid})--%>
-                params.append("userid","201811701316")
+                params.append("userid",${user.userid})
+                // params.append("userid","201811701316")
                 axios.post('${pageContext.request.contextPath}/competition/getPermitEquipment',params).then(response=>{
                     const items = response.data
                     this.equipments = items.map(item=>({
@@ -150,7 +150,7 @@
                 })
             },
             doApplication(){
-                if(this.judgename==='' && this.competitionname===''){
+                if(this.judgename==='' || this.competitionname===''){
                     alert("裁判名，比赛名不能为空")
                     return
                 }

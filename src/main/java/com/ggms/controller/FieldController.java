@@ -51,9 +51,9 @@ public class FieldController {
     }
     @RequestMapping("/applicateField")
     public @ResponseBody String applicateField(HttpSession session, @RequestParam("fieldid") Integer fieldid, @RequestParam("time")List<Integer> times, @RequestParam("date")String date){
-//        User user = (User)session.getAttribute("user");
-//        String userid = user.getUserid();
-        fieldService.doApplication("201811701316",fieldid,date,times);
+        User user = (User)session.getAttribute("user");
+        String userid = user.getUserid();
+        fieldService.doApplication(userid,fieldid,date,times);
         return "/user/userMain";
     }
 

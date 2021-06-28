@@ -27,15 +27,6 @@ public class CompetitionController {
         return competitionService.getCompetitions(null);
     }
 
-/*    @RequestMapping("/competitionApplication/{id}")
-    public ModelAndView competitionApplication(@PathVariable("id") Integer competitionId){
-        ModelAndView m = new ModelAndView();
-        m.setViewName("WEB-INF/jsp/competitionApplication");
-        Competition competition = competitionService.getCompetition(competitionId);
-        m.addObject("competition",competition);
-        return m;
-    }*/
-
         @RequestMapping("/competitionApplication")
     public String competitionApplication(){
         return "competitionApplication";
