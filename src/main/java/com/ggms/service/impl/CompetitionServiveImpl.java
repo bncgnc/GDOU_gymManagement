@@ -75,4 +75,20 @@ public class CompetitionServiveImpl implements CompetitionService {
         competition.setEquipmentApplicationid(equipmentApplicationid);
         competitionMapper.updateByPrimaryKey(competition);
     }
+
+    @Override
+    public void competitionPermit(Integer competitionId) {
+        Competition competition = competitionMapper.selectByPrimaryKey(competitionId);
+        competition.setCapermit(1);
+
+        competitionMapper.updateByPrimaryKey(competition);
+    }
+
+    @Override
+    public void competitionRefuse(Integer competitionId) {
+        Competition competition = competitionMapper.selectByPrimaryKey(competitionId);
+        competition.setCapermit(2);
+
+        competitionMapper.updateByPrimaryKey(competition);
+    }
 }

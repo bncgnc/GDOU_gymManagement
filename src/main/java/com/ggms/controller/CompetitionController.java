@@ -6,9 +6,16 @@ import com.ggms.pojo.SimpleField;
 import com.ggms.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
+
 import java.util.List;
 
 @Controller
@@ -49,4 +56,30 @@ public class CompetitionController {
     public void updateCompetitionApplication(@RequestParam("competitionid") Integer competitionid,@RequestParam("equipmentApplicationid") Integer equipmentApplicationid,@RequestParam("fieldApplicationid") Integer fieldApplicationid,@RequestParam("judge") String judge,@RequestParam("cname") String cname){
             competitionService.updateCompetitionApplication(competitionid,equipmentApplicationid,fieldApplicationid,judge,cname);
     }
+
+
+    @GetMapping("/competitionSelect")
+    public ModelAndView competitionSelect() {
+        ModelAndView mv = new ModelAndView();
+
+        List<Competition> competitions = competitionService.getCompetitions(null);
+
+        mv.addObject("competitionList" , competitions);
+        mv.setViewName("competitionManagerCheckTable");
+
+        return mv;
+    }
+
+    @GetMapping("/competitionPermit/{competitionId}")
+    public String competitionPermit(@PathVariable("competitionId")Integer competitionId){
+        competitionService.competitionPermit(competitionId);
+        return "redirect:/competition/competitionSelect";
+    }
+
+    @GetMapping("/competitionRefuse/{competitionId}")
+    public String competitionRefuse(@PathVariable("competitionId")Integer competitionId){
+        competitionService.competitionRefuse(competitionId);
+        return "redirect:/competition/competitionSelect";
+    }
+
 }

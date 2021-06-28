@@ -22,4 +22,9 @@ public interface CompetitionService {
     public Competition getCompetitionApplication(Integer id);
 
     void updateCompetitionApplication(Integer competitionid,Integer equipmentApplicationid, Integer fieldApplicationid, String judge, String cname);
+
+
+    public void competitionPermit(Integer competitionId);
+
+    public void competitionRefuse(Integer competitionId);
 }

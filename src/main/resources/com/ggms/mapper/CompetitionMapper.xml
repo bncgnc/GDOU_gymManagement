@@ -89,7 +89,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    competitionid, cname, cjudge, field_applicationid, equipment_applicationid
+    competitionid, cname, cjudge, field_applicationid, equipment_applicationid , capermit
   </sql>
   <select id="selectByExample" parameterType="com.ggms.pojo.CompetitionExample" resultMap="BaseResultMap">
     select
